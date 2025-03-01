@@ -56,9 +56,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      Solution_Path: \src\GherXunit.sln              
-      Test_Project_Path: sample\BddSample\BddSample.csproj   
-     
+      Solution_Path: /src/GherXunit.sln               
 
     steps:
     - name: Checkout
