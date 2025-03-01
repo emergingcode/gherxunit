@@ -1,4 +1,5 @@
 # 🚀 GherXUnit: An Alternative for BDD with xUnit
+[🇧🇷 Versão em Português](README_PTBR.md) | [🇬🇧 English Version](README.md)
 
 The adoption of Behavior-Driven Development (BDD) has become increasingly common in software development, promoting better communication between technical and non-technical teams. However, its integration with traditional testing frameworks is not always straightforward.
 
