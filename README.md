@@ -66,6 +66,15 @@ public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
     private void WhenPattyLogsSteps() { }
 }
 ```
+
+The result of running the test scenarios defined in the `SubscriptionTest` class would be similar to the following output:
+
+![img.png](docs/img1.png)
+
+In error cases, the output would look like this:  
+![img.png](docs/img2.png)
+
+
 > [!TIP]  
 > In this example, the `SubscriptionTest` class is split into two files. The first file defines the test scenarios, while the second file defines the step methods. Using `partial` allows both files to contribute to the definition of the same `SubscriptionTest` class.
 

@@ -5,13 +5,11 @@ A adoção do Behavior-Driven Development (BDD) tem se tornado cada vez mais com
 O GherXUnit surge como uma alternativa viável para equipes que desejam explorar os benefícios do BDD dentro da estrutura do xUnit, sem precisar de ferramentas externas como Cucumber ou SpecFlow.
 
 ### 🔴 Os Desafios do BDD
-> [!INFORMATION]  
-> De acordo com o estudo “Behavior Driven Development: A Systematic Literature Review” (Farooq et al., 2023, IEEE Access)
-
-Algumas dificuldades recorrentes no uso do BDD incluem
- - ❌ Automação complexa: A integração com ferramentas externas pode aumentar a complexidade da configuração e execução dos testes.
- - ❌ Manutenção difícil: À medida que a base de testes cresce, cenários Gherkin podem se tornar difíceis de gerenciar.
- - ❌ Curva de aprendizado: A necessidade de dominar novas ferramentas pode dificultar a adoção do BDD, especialmente em times já acostumados com frameworks tradicionais.
+> [!IMPORTANT]  
+> De acordo com o estudo “Behavior Driven Development: A Systematic Literature Review” (Farooq et al., 2023, IEEE Access), algumas dificuldades recorrentes no uso do BDD incluem
+> - Automação complexa: A integração com ferramentas externas pode aumentar a complexidade da configuração e execução dos testes.
+> - Manutenção difícil: À medida que a base de testes cresce, cenários Gherkin podem se tornar difíceis de gerenciar.
+> - Curva de aprendizado: A necessidade de dominar novas ferramentas pode dificultar a adoção do BDD, especialmente em times já acostumados com frameworks tradicionais.
 
 ### ✅ Onde o GherXUnit Pode Ajudar?
 
@@ -69,6 +67,10 @@ public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
     private void WhenPattyLogsSteps() { }
 }
 ```
+
+O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
+![img.png](docs/img.png)
+
 > [!TIP]  
 > Neste exemplo, a classe `SubscriptionTest` é dividida em dois arquivos. O primeiro arquivo define os cenários de teste, enquanto o segundo arquivo define os métodos de passos. O uso de `partial` permite que ambos os arquivos contribuam para a definição da mesma classe `SubscriptionTest`.
 
