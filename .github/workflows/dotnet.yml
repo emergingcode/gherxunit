@@ -78,6 +78,7 @@ jobs:
     - name: Build application
       run: dotnet build $env:Solution_Path --no-restore --configuration $env:Configuration
       env:
+        Solution_Path: src/GherXunit.sln
         Configuration: ${{ matrix.configuration }}
 
 
