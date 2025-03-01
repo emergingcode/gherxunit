@@ -15,8 +15,8 @@ public partial class BackgroundTest
                """);
 
     [Scenario("Dr. Bill posts to his own blog")]
-    public async Task Scenario01() => await this.ExecuteAscync(
-        refer: Step01,
+    public async Task DrBillPostToBlog() => await this.ExecuteAscync(
+        refer: DrBillPostToBlogStep,
         steps: """
                Given I am logged in as Dr. Bill
                When I try to post to "Expensive Therapy"
@@ -24,8 +24,8 @@ public partial class BackgroundTest
                """);
 
     [Scenario("Dr. Bill tries to post to somebody else's blog, and fails")]
-    public async Task Scenario02() => await this.ExecuteAscync(
-        refer: Step02,
+    public async Task DrBillPostToBlogFail() => await this.ExecuteAscync(
+        refer: DrBillPostToBlogFailStep,
         steps: """
                Given I am logged in as Dr. Bill
                When I try to post to "Greg's anti-tax rants"
@@ -33,8 +33,8 @@ public partial class BackgroundTest
                """);
 
     [Scenario("Greg posts to a client's blog")]
-    public async Task Scenario03() => await this.ExecuteAscync(
-        refer: Step03,
+    public async Task GregPostToBlog() => await this.ExecuteAscync(
+        refer: GregPostToBlogStep,
         steps: """
                Given I am logged in as Greg
                When I try to post to "Expensive Therapy"

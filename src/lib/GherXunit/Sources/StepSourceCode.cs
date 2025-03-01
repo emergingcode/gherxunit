@@ -148,16 +148,16 @@ public struct StepSourceCode
         
             private static string Highlights(this string steps, bool isException = false)
             {
-                var color = isException ? "31m" : "38;5;82m";
+                var color = isException ? "\u001b[31m" : "\u001b[38;5;82m";
         
                 var replacements = new Dictionary<string, string>
                 {
-                    { "Given", $"{(char)27}[{color}GIVEN{(char)27}[0m" },
-                    { "When", $"{(char)27}[{color}WHEN{(char)27}[0m" },
-                    { "Then", $"{(char)27}[{color}THEN{(char)27}[0m" },
-                    { "And", $"{(char)27}[{color}AND{(char)27}[0m" },
-                    { "<<", $"{(char)27}[35m" },
-                    { ">>", $"{(char)27}[0m" }
+                    { "Given", $"{color}GIVEN\u001b[0m" },
+                    { "When", $"{color}WHEN\u001b[0m" },
+                    { "Then", $"{color}THEN\u001b[0m" },
+                    { "And", $"{color}AND\u001b[0m" },
+                    { "<<", $"\u001b[35m" },
+                    { ">>", $"\u001b[0m" }
                 };
         
                 var sb = new StringBuilder(steps);

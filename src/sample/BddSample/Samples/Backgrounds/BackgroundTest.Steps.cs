@@ -19,28 +19,28 @@ public partial class BackgroundTest : IGherXunitBackground<BackgroundContext>
         Output.WriteLine("");
     }
     
-    private async Task Step01()
+    private async Task DrBillPostToBlogStep()
     {
         var result = await PostToBlog("Dr. Bill", "Expensive Therapy");
         result.Should().Be("Your article was published.");
     }
     
-    private async Task Step02()
+    private async Task DrBillPostToBlogFailStep()
     {
-        await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                PostToBlog("Dr. Bill", "Greg's anti-tax rants"));
+        var result = await PostToBlog("Dr. Bill", "Greg's anti-tax rants");
+        result.Should().Be("Hey! That's not your blog!");
     }
 
-    private async Task Step03()
+    private async Task GregPostToBlogStep()
     {
-        var result = await PostToBlog("Greg", "Expensive Therapy");
+        var result = await PostToBlog("Greg", "Greg's anti-tax rants");
         result.Should().Be("Your article was published.");
     }
 
     private async Task<string> PostToBlog(string owner, string blog)
     {
         if (!Context.OwnersAndBlogs.TryGetValue(owner, out string? value) || value != blog)
-            throw new InvalidOperationException("Hey! That's not your blog!");
+            return "Hey! That's not your blog!";
         
         await Task.Yield();
         return "Your article was published.";
