@@ -1,13 +1,12 @@
 namespace GherXunit.Sources;
 
-public struct StepSourceCode
+internal struct StepSourceCode
 {
     public const string SOURCE =
         """
         #nullable enable
         using System.Reflection;
         using System.Text;
-        
         
         namespace GherXunit.Annotations;
         
@@ -21,7 +20,7 @@ public struct StepSourceCode
         /// See the <see href="https://cucumber.io/docs/gherkin/reference#steps">cucumber.io</see> documentation
         /// or <see href="https://dannorth.net/introducing-bdd/">introducing-bdd</see> page for more information.
         /// </summary>
-        public static partial class GherXunitSteps
+        internal static partial class GherXunitSteps
         {
             /// <summary>
             /// Execute the steps in the scenario asynchronously.
@@ -56,7 +55,7 @@ public struct StepSourceCode
         /// See the <see href="https://cucumber.io/docs/gherkin/reference#steps">cucumber.io</see> documentation
         /// or <see href="https://dannorth.net/introducing-bdd/">introducing-bdd</see> page for more information.
         /// </summary>
-        public static partial class GherXunitSteps
+        internal static partial class GherXunitSteps
         {
             /// <summary>
             /// Execute the steps in the scenario synchronously.
@@ -91,24 +90,26 @@ public struct StepSourceCode
         /// See the <see href="https://cucumber.io/docs/gherkin/reference#steps">cucumber.io</see> documentation
         /// or <see href="https://dannorth.net/introducing-bdd/">introducing-bdd</see> page for more information.
         /// </summary>
-        public static partial class GherXunitSteps
+        internal static partial class GherXunitSteps
         {
             /// <summary>
             /// Just output the steps in the scenario.
             /// </summary>
             /// <param name="feature">Feature</param>
             /// <param name="steps">Steps executed</param>
-            public static void NonExecutable(this IGherXunit feature, string steps)
-                => feature.Output.WriteLine(steps.Highlights());
+            public static void NonExecutable(this IGherXunit feature, string? steps = null)
+            {
+                if (steps is not null) feature.Output.WriteLine(steps.Highlights());
+            }
         
             /// <summary>
             /// Just output the steps in the scenario.
             /// </summary>
             /// <param name="feature">Feature</param>
             /// <param name="steps">Steps executed</param>    
-            public static Task NonExecutableAsync(this IGherXunit feature, string steps)
+            public static Task NonExecutableAsync(this IGherXunit feature, string? steps = null)
             {
-                feature.Output.WriteLine(steps.Highlights());
+                if (steps is not null) feature.Output.WriteLine(steps.Highlights());
                 return Task.CompletedTask;
             }
             

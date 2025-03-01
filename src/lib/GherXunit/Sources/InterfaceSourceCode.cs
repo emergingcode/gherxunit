@@ -1,6 +1,6 @@
 namespace GherXunit.Sources;
 
-public struct InterfaceSourceCode
+internal struct InterfaceSourceCode
 {
     public const string SOURCE =
         """
@@ -9,12 +9,12 @@ public struct InterfaceSourceCode
 
         namespace GherXunit.Annotations;
 
-        public interface IGherXunitBackground<T>:IGherXunit, IClassFixture<T> where T : class
+        internal interface IGherXunitBackground<T>:IGherXunit, IClassFixture<T> where T : class
         {
             void Setup();
         }
 
-        public interface IGherXunit
+        internal interface IGherXunit
         {
             public ITestOutputHelper Output { get; }
         }

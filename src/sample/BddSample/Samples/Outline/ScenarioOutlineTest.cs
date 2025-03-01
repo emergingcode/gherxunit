@@ -2,6 +2,7 @@ using GherXunit.Annotations;
 
 namespace BddTests.Samples.Outline;
 
+[Feature("Scenario Outline")]
 public partial class ScenarioOutlineTest
 {
     [ScenarioOutline("eating")]
