@@ -4,14 +4,11 @@ The adoption of Behavior-Driven Development (BDD) has become increasingly common
 
 GherXUnit emerges as a viable alternative for teams looking to explore the benefits of BDD within the xUnit framework, without requiring external tools such as Cucumber or SpecFlow.
 
-### 🔴 The Challenges of BDD
-> [!INFORMATION]  
-> According to the study *Behavior Driven Development: A Systematic Literature Review* (Farooq et al., 2023, IEEE Access)
-
-Some recurring difficulties in using BDD include:
-- ❌ **Complex automation**: Integration with external tools can increase configuration and test execution complexity.
-- ❌ **Difficult maintenance**: As the test base grows, Gherkin scenarios can become hard to manage.
-- ❌ **Learning curve**: The need to master new tools can hinder BDD adoption, especially in teams already familiar with traditional frameworks.
+> [!IMPORTANT]  
+> According to the study *Behavior Driven Development: A Systematic Literature Review* (Farooq et al., 2023, IEEE Access), some recurring difficulties in using BDD include:
+> - **Complex automation**: Integration with external tools can increase configuration and test execution complexity.
+> - **Difficult maintenance**: As the test base grows, Gherkin scenarios can become hard to manage.
+> - **Learning curve**: The need to master new tools can hinder BDD adoption, especially in teams already familiar with traditional frameworks.
 
 ### ✅ Where Can GherXUnit Help?
 
