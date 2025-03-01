@@ -50,16 +50,15 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        #configuration: [Debug, Release]
+        configuration: [Release]
 
     runs-on: ubuntu-latest
 
     env:
-      Solution_Path: ./src/GherXunit.sln
-      Solution_Name: GherXunit.sln                          
+      Solution_Path: \src\GherXunit.sln              
       Test_Project_Path: sample\BddSample\BddSample.csproj   
-      Wap_Project_Directory: lib\GherXunit                   
-      Wap_Project_Path: lib\GherXunit\GherXunit.csproj       
+     
 
     steps:
     - name: Checkout
