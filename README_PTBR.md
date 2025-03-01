@@ -70,7 +70,11 @@ public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
 ```
 
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
-![img.png](docs/img.png)
+
+![img.png](docs/img1.png)
+
+Em casos de erro, a saída seria semelhante a esta:  
+![img.png](docs/img2.png)
 
 > [!TIP]  
 > Neste exemplo, a classe `SubscriptionTest` é dividida em dois arquivos. O primeiro arquivo define os cenários de teste, enquanto o segundo arquivo define os métodos de passos. O uso de `partial` permite que ambos os arquivos contribuam para a definição da mesma classe `SubscriptionTest`.
