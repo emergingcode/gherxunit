@@ -1,0 +1,22 @@
+namespace GherXunit.Sources;
+
+public struct InterfaceSourceCode
+{
+    public const string SOURCE =
+        """
+        #nullable enable
+        using Xunit.Abstractions;
+
+        namespace GherXunit.Annotations;
+
+        public interface IGherXunitBackground<T>:IGherXunit, IClassFixture<T> where T : class
+        {
+            void Setup();
+        }
+
+        public interface IGherXunit
+        {
+            public ITestOutputHelper Output { get; }
+        }
+        """;
+}

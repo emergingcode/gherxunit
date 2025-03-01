@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <PackageId>GherXunit</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Yan Justino</Authors>
+        <Company>Emergingcode</Company>
+        <Description>GherXunit emerges as a viable alternative for those seeking an approach that combines the expressiveness of BDD with the well-established structure of xUnit.</Description>
+        <PackageTags>BDD;XUnit;Tests</PackageTags>
+        <RepositoryUrl>https://github.com/emergingcode/gherxunit</RepositoryUrl>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" PrivateAssets="all" />
+    </ItemGroup>
+</Project>
