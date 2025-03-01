@@ -72,7 +72,7 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test ./src/GherXunit.sln
+      run: dotnet test ${{ env.Solution_Path }}
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Build application
