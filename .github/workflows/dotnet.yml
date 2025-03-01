@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      Solution_Path: src/GherXunit.sln               
+      Solution_Path: ./src/GherXunit.sln               
 
     steps:
     - name: Checkout
@@ -78,7 +78,7 @@ jobs:
     - name: Build application
       run: dotnet build $env:Solution_Path --no-restore --configuration $env:Configuration
       env:
-        Solution_Path: src/GherXunit.sln
+        Solution_Path: ${{ env.Solution_Path }}
         Configuration: ${{ matrix.configuration }}
 
 
