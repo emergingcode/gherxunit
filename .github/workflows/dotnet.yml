@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      Solution_Path: /src/GherXunit.sln               
+      Solution_Path: src/GherXunit.sln               
 
     steps:
     - name: Checkout
