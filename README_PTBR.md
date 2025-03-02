@@ -25,49 +25,10 @@ O GherXUnit busca oferecer uma alternativa para equipes que já utilizam xUnit e
 A ideia central do GherXUnit é permitir que cenários de testes sejam escritos em uma estrutura familiar para quem já usa xUnit.
 
 ####  📌 Exemplo de Definição de Cenário:
-```csharp
-using GherXunit.Annotations;
-
-namespace BddTests.Samples.Features;
-
-[Feature("Subscribers see different articles based on their subscription level")]
-public partial class SubscriptionTest
-{
-    [Scenario("Free subscribers see only the free articles")]
-    async Task WhenFriedaLogs() => await this.ExecuteAscync(
-        refer: WhenFriedaLogsSteps,
-        steps: """
-               Given Free Frieda has a free subscription
-               When Free Frieda logs in with her valid credentials
-               Then she sees a Free article
-               """);
-
-    [Scenario("Subscriber with a paid subscription can access both free and paid articles")]
-    void WhenPattyLogs() => this.Execute(
-        refer: WhenPattyLogsSteps,
-        steps: """
-               Given Paid Patty has a basic-level paid subscription
-               When Paid Patty logs in with her valid credentials
-               Then she sees a Free article and a Paid article
-               """);
-}
-```
+![img.png](docs/img_code1.png)
 
 #### 📌 Exemplo de Implementação de Passos:
-```csharp
-using GherXunit.Annotations;
-using Xunit.Abstractions;
-
-namespace BddTests.Samples.Features;
-
-public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
-{
-    public ITestOutputHelper Output { get; } = output;
-
-    private async Task WhenFriedaLogsSteps() => await Task.CompletedTask;
-    private void WhenPattyLogsSteps() { }
-}
-```
+![img.png](docs/img_code2.png)
 
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
 
