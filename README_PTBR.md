@@ -3,25 +3,25 @@
 
 A adoção do Behavior-Driven Development (BDD) tem se tornado cada vez mais comum no desenvolvimento de software, promovendo melhor comunicação entre times técnicos e não técnicos. No entanto, sua integração com frameworks tradicionais de testes nem sempre é simples.
 
-O GherXUnit surge como uma alternativa viável para equipes que desejam explorar os benefícios do BDD dentro da estrutura do xUnit, sem precisar de ferramentas externas como Cucumber ou SpecFlow.
+O **GherXunit** surge como uma alternativa viável para equipes que desejam explorar os benefícios do BDD dentro da estrutura do xUnit, sem precisar de ferramentas externas como Cucumber ou SpecFlow.
 
 > [!IMPORTANT]  
-> De acordo com o estudo “Behavior Driven Development: A Systematic Literature Review” (Farooq et al., 2023, IEEE Access), algumas dificuldades recorrentes no uso do BDD incluem
-> - Automação complexa: A integração com ferramentas externas pode aumentar a complexidade da configuração e execução dos testes.
-> - Manutenção difícil: À medida que a base de testes cresce, cenários Gherkin podem se tornar difíceis de gerenciar.
-> - Curva de aprendizado: A necessidade de dominar novas ferramentas pode dificultar a adoção do BDD, especialmente em times já acostumados com frameworks tradicionais.
+> De acordo com o estudo **“Behavior Driven Development: A Systematic Literature Review” (Farooq et al., 2023, IEEE Access)**, algumas dificuldades recorrentes no uso do BDD incluem
+> - ⛔︎ **Automação complexa**: A integração com ferramentas externas pode aumentar a complexidade da configuração e execução dos testes.
+> - ⛔︎ **Manutenção difícil**: À medida que a base de testes cresce, cenários Gherkin podem se tornar difíceis de gerenciar.
+> - ⛔︎ **Curva de aprendizado**: A necessidade de dominar novas ferramentas pode dificultar a adoção do BDD, especialmente em times já acostumados com frameworks tradicionais.
 
-### ✅ Onde o GherXUnit Pode Ajudar?
+### ✅ Onde o GherXunit Pode Ajudar?
 
 O GherXUnit busca oferecer uma alternativa para equipes que já utilizam xUnit e gostariam de incorporar a estrutura do BDD sem mudar completamente suas ferramentas. Entre os seus benefícios, estão:
 
-- ✔ Uso da sintaxe Gherkin diretamente no xUnit, reduzindo dependências externas.
-- ✔ Código mais modular e organizado, utilizando partial classes para separar cenários e passos.
-- ✔ Maior integração com testes unitários, permitindo uma transição mais suave entre diferentes níveis de teste.
+- ✔ **Uso da sintaxe Gherkin diretamente no xUnit**, reduzindo dependências externas.
+- ✔ **Código mais modular e organizado**, utilizando partial classes para separar cenários e passos.
+- ✔ **Maior integração com testes unitários**, permitindo uma transição mais suave entre diferentes níveis de teste.
 
 ### 💡 Como funciona?
 
-A ideia central do GherXUnit é permitir que cenários de testes sejam escritos em uma estrutura familiar para quem já usa xUnit.
+A ideia central do **GherXunit** é permitir que cenários de testes sejam escritos em uma estrutura familiar para quem já usa xUnit.
 
 ####  📌 Exemplo de Definição de Cenário:
 ![img.png](docs/img_code1.png)
@@ -41,9 +41,9 @@ O resultado da execução dos cenários de teste definidos na classe `Subscripti
 Veja mais exemplos de uso e detalhes de implementação de `Background`, `Rule`, `Features` e outros elementos
 no [código exemplo](/src/sample/BddSample/Samples) disponível no repositório do GherXUnit.
 
-### 🔎 O GherXUnit é para você?
+### 🔎 O GherXunit é para você?
 
-Se a sua equipe já usa xUnit e deseja experimentar uma abordagem mais próxima do BDD, sem mudar drasticamente seu fluxo de trabalho, o GherXUnit pode ser uma opção a considerar. Ele não elimina todos os desafios do BDD, mas busca facilitar sua adoção em ambientes onde o xUnit já é amplamente utilizado.
+Se a sua equipe já usa xUnit e deseja experimentar uma abordagem mais próxima do BDD, sem mudar drasticamente seu fluxo de trabalho, o GherXunit pode ser uma opção a considerar. Ele não elimina todos os desafios do BDD, mas busca facilitar sua adoção em ambientes onde o xUnit já é amplamente utilizado.
 
 💬 O que você acha dessa abordagem? Sua equipe já adotou BDD? Vamos trocar ideias nos comentários! 🚀
 
