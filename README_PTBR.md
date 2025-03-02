@@ -7,9 +7,11 @@ O **GherXunit** surge como uma alternativa viável para equipes que desejam expl
 
 > [!IMPORTANT]  
 > De acordo com o estudo **“Behavior Driven Development: A Systematic Literature Review” (Farooq et al., 2023, IEEE Access)**, algumas dificuldades recorrentes no uso do BDD incluem
-> - ⛔︎ **Automação complexa**: A integração com ferramentas externas pode aumentar a complexidade da configuração e execução dos testes.
-> - ⛔︎ **Manutenção difícil**: À medida que a base de testes cresce, cenários Gherkin podem se tornar difíceis de gerenciar.
-> - ⛔︎ **Curva de aprendizado**: A necessidade de dominar novas ferramentas pode dificultar a adoção do BDD, especialmente em times já acostumados com frameworks tradicionais.
+> - **Automação complexa**: A integração com ferramentas externas pode aumentar a complexidade da configuração e execução dos testes.
+> - **Manutenção difícil**: À medida que a base de testes cresce, cenários Gherkin podem se tornar difíceis de gerenciar.
+> - **Curva de aprendizado**: A necessidade de dominar novas ferramentas pode dificultar a adoção do BDD, especialmente em times já acostumados com frameworks tradicionais.
+
+<br>
 
 ### ✅ Onde o GherXunit Pode Ajudar?
 
@@ -24,9 +26,11 @@ O GherXUnit busca oferecer uma alternativa para equipes que já utilizam xUnit e
 A ideia central do **GherXunit** é permitir que cenários de testes sejam escritos em uma estrutura familiar para quem já usa xUnit.
 
 ####  📌 Exemplo de Definição de Cenário:
+O trecho de código a seguir mostra um cenário de teste definido usando a sintaxe Gherkin em uma classe chamada `SubscriptionTest`:
 ![img.png](docs/img_code1.png)
 
 #### 📌 Exemplo de Implementação de Passos:
+O trecho de código a seguir mostra a implementação dos métodos de passos para o cenário de teste definido na classe `SubscriptionTest`:
 ![img.png](docs/img_code2.png)
 
 > [!TIP]  

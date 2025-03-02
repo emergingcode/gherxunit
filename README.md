@@ -7,9 +7,11 @@ The adoption of Behavior-Driven Development (BDD) has become increasingly common
 
 > [!IMPORTANT]  
 > According to the study *Behavior Driven Development: A Systematic Literature Review* (Farooq et al., 2023, IEEE Access), some recurring difficulties in using BDD include:
-> - ⛔︎ **Complex automation**: Integration with external tools can increase configuration and test execution complexity.
-> - ⛔︎ **Difficult maintenance**: As the test base grows, Gherkin scenarios can become hard to manage.
-> - ⛔︎ **Learning curve**: The need to master new tools can hinder BDD adoption, especially in teams already familiar with traditional frameworks.
+> - **Complex automation**: Integration with external tools can increase configuration and test execution complexity.
+> - **Difficult maintenance**: As the test base grows, Gherkin scenarios can become hard to manage.
+> - **Learning curve**: The need to master new tools can hinder BDD adoption, especially in teams already familiar with traditional frameworks.
+
+<br>
 
 ### ✅ Where Can GherXunit Help?
 
@@ -24,9 +26,11 @@ The adoption of Behavior-Driven Development (BDD) has become increasingly common
 The core idea of **GherXunit** is to allow test scenarios to be written in a structure familiar to those already using xUnit.
 
 #### 📌 Example of Scenario Definition:
+The following code snippet shows a test scenario defined using Gherkin syntax in a class named `SubscriptionTest`:
 ![img.png](docs/img_code1.png)
 
 #### 📌 Example of Step Implementation:
+The following code snippet shows the implementation of the step methods for the test scenario defined in the `SubscriptionTest` class:
 ![img.png](docs/img_code2.png)
 
 > [!TIP]  
