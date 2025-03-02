@@ -70,10 +70,7 @@ public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
 
 The result of running the test scenarios defined in the `SubscriptionTest` class would be similar to the following output:
 
-![img.png](docs/img1.png)
-
-In error cases, the output would look like this:  
-![img.png](docs/img2.png)
+![img.png](docs/img3.png)
 
 
 > [!TIP]  
