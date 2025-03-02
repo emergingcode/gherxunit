@@ -85,6 +85,6 @@ jobs:
     - name: Publish DLL Artifact
       if: github.ref == 'refs/heads/main'
       run: |
-        dotnet pack ${{evn.Project_Path}} --no-restore --configuration ${{ matrix.configuration }} -p:PackageVersion=${{ env.Version }}
-        dotnet nuget push ${{evn.Package_Path}}.${{ env.Version }}.nupkg --api-key ${{ secrets.NUGET_KEY }} --source ${{ env.NUGET_INDEX }}
+        dotnet pack ${{env.Project_Path}} --no-restore --configuration ${{ matrix.configuration }} -p:PackageVersion=${{ env.Version }}
+        dotnet nuget push ${{env.Package_Path}}.${{ env.Version }}.nupkg --api-key ${{ secrets.NUGET_KEY }} --source ${{ env.NUGET_INDEX }}
       
