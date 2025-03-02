@@ -35,7 +35,7 @@ A ideia central do **GherXunit** é permitir que cenários de testes sejam escri
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
 
 <p align="center" style="padding: 35px">
-  <img src="docs/img3.png" alt="img.png" width="900px"/>
+  <img src="docs/img3.png" alt="img.png" width="1386"/>
 </p>
 
 

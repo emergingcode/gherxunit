@@ -35,7 +35,7 @@ The core idea of **GherXunit** is to allow test scenarios to be written in a str
 The result of running the test scenarios defined in the `SubscriptionTest` class would be similar to the following output:
 
 <p align="center">
-  <img src="docs/img3.png" alt="img.png" width="900px"/>
+  <img src="docs/img3.png" alt="img.png" width="1386"/>
 </p>
 
 
