@@ -3,7 +3,7 @@
 
 The adoption of Behavior-Driven Development (BDD) has become increasingly common in software development, promoting better communication between technical and non-technical teams. However, its integration with traditional testing frameworks is not always straightforward.
 
-**GherXunit** emerges as a viable alternative for teams looking to explore the benefits of BDD within the xUnit framework, without requiring external tools such as Cucumber or SpecFlow.
+**GherXunit** emerges as a viable alternative for teams looking to explore the benefits of BDD within the xUnit framework, without requiring external tools such as Cucumber or SpecFlow. It acts as a superset of xUnit, allowing tests to be written in Gherkin.
 
 > [!IMPORTANT]  
 > According to the study *Behavior Driven Development: A Systematic Literature Review* (Farooq et al., 2023, IEEE Access), some recurring difficulties in using BDD include:
@@ -32,6 +32,7 @@ The core idea of **GherXunit** is to allow test scenarios to be written in a str
 > [!TIP]  
 > In this example, the `SubscriptionTest` class is split into two files. The first file defines the test scenarios, while the second file defines the step methods. Using `partial` allows both files to contribute to the definition of the same `SubscriptionTest` class.
 
+#### 📌 Example of output highlighting the test results:
 The result of running the test scenarios defined in the `SubscriptionTest` class would be similar to the following output:
 
 <p align="center">
