@@ -1,5 +1,6 @@
 # 🚀 GherXUnit: Uma Alternativa para BDD com xUnit
-[🇧🇷 Versão em Português](README_PTBR.md) | [🇬🇧 English Version](README.md)
+[🇧🇷 Versão em Português](README_PTBR.md) | [🇬🇧 English Version](README.md)  
+[![NuGet](https://img.shields.io/nuget/v/GherXunit.svg)](https://www.nuget.org/packages/GherXunit)
 
 A adoção do Behavior-Driven Development (BDD) tem se tornado cada vez mais comum no desenvolvimento de software, promovendo melhor comunicação entre times técnicos e não técnicos. No entanto, sua integração com frameworks tradicionais de testes nem sempre é simples.
 
@@ -11,8 +12,6 @@ O **GherXunit** surge como uma alternativa viável para equipes que desejam expl
 > - **Manutenção difícil**: À medida que a base de testes cresce, cenários Gherkin podem se tornar difíceis de gerenciar.
 > - **Curva de aprendizado**: A necessidade de dominar novas ferramentas pode dificultar a adoção do BDD, especialmente em times já acostumados com frameworks tradicionais.
 
-<br>
-
 ### ✅ Onde o GherXunit Pode Ajudar?
 
 O GherXUnit busca oferecer uma alternativa para equipes que já utilizam xUnit e gostariam de incorporar a estrutura do BDD sem mudar completamente suas ferramentas. Entre os seus benefícios, estão:
@@ -21,9 +20,20 @@ O GherXUnit busca oferecer uma alternativa para equipes que já utilizam xUnit e
 - ✔ **Código mais modular e organizado**, utilizando partial classes para separar cenários e passos.
 - ✔ **Maior integração com testes unitários**, permitindo uma transição mais suave entre diferentes níveis de teste.
 
+### 📦 Começando
+
+Este pacote está disponível através do [Nuget Packages](https://www.nuget.org/packages/GherXunit/).
+
+| Version                                                                                        | Downloads | Status |  
+|------------------------------------------------------------------------------------------------| ----- |----- |
+| [![NuGet](https://img.shields.io/nuget/v/GherXunit.svg)](https://www.nuget.org/packages/GherXunit) | [![Nuget](https://img.shields.io/nuget/dt/GherXunit.svg)](https://www.nuget.org/packages/GherXunit) | [![.NET](https://github.com/emergingcode/gherxunit/actions/workflows/dotnet.yml/badge.svg)](https://github.com/emergingcode/gherxunit/actions/workflows/dotnet.yml) |
+
+
 ### 💡 Como funciona?
 
 A ideia central do **GherXunit** é permitir que cenários de testes sejam escritos em uma estrutura familiar para quem já usa xUnit.
+Para isso, ele fornece um conjunto de atributos e métodos que permitem a definição de cenários de teste usando a sintaxe Gherkin.
+As seções a seguir fornecem exemplos de como definir cenários de teste e implementar métodos de passos usando o **GherXunit**.
 
 ####  📌 Exemplo de Definição de Cenário:
 O trecho de código a seguir mostra um cenário de teste definido usando a sintaxe Gherkin em uma classe chamada `SubscriptionTest`:

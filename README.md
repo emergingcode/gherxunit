@@ -1,5 +1,6 @@
 # 🚀 GherXUnit: An Alternative for BDD with xUnit
-[🇧🇷 Versão em Português](README_PTBR.md) | [🇬🇧 English Version](README.md)
+[🇧🇷 Versão em Português](README_PTBR.md) | [🇬🇧 English Version](README.md)  
+[![NuGet](https://img.shields.io/nuget/v/C4Sharp.svg)](https://www.nuget.org/packages/C4Sharp)
 
 The adoption of Behavior-Driven Development (BDD) has become increasingly common in software development, promoting better communication between technical and non-technical teams. However, its integration with traditional testing frameworks is not always straightforward.
 
@@ -11,7 +12,6 @@ The adoption of Behavior-Driven Development (BDD) has become increasingly common
 > - **Difficult maintenance**: As the test base grows, Gherkin scenarios can become hard to manage.
 > - **Learning curve**: The need to master new tools can hinder BDD adoption, especially in teams already familiar with traditional frameworks.
 
-<br>
 
 ### ✅ Where Can GherXunit Help?
 
@@ -21,9 +21,20 @@ The adoption of Behavior-Driven Development (BDD) has become increasingly common
 - ✔ **More modular and organized code**, using partial classes to separate scenarios and steps.
 - ✔ **Better integration with unit tests**, allowing a smoother transition between different levels of testing.
 
+### 📦 Getting Started
+
+This package is available through [Nuget Packages](https://www.nuget.org/packages/GherXunit/).
+
+| Version                                                                                        | Downloads | Status |  
+|------------------------------------------------------------------------------------------------| ----- |----- |
+| [![NuGet](https://img.shields.io/nuget/v/GherXunit.svg)](https://www.nuget.org/packages/GherXunit) | [![Nuget](https://img.shields.io/nuget/dt/GherXunit.svg)](https://www.nuget.org/packages/GherXunit) | [![.NET](https://github.com/emergingcode/gherxunit/actions/workflows/dotnet.yml/badge.svg)](https://github.com/emergingcode/gherxunit/actions/workflows/dotnet.yml) |
+
+
 ### 💡 How Does It Work?
 
 The core idea of **GherXunit** is to allow test scenarios to be written in a structure familiar to those already using xUnit.
+For that, it provides a set of attributes and methods that allow the definition of test scenarios using Gherkin syntax.
+The following sections provide examples of how to define test scenarios and implement step methods using **GherXunit**.
 
 #### 📌 Example of Scenario Definition:
 The following code snippet shows a test scenario defined using Gherkin syntax in a class named `SubscriptionTest`:
@@ -46,7 +57,6 @@ The result of running the test scenarios defined in the `SubscriptionTest` class
 <br>
 
 ### 🔎 Is GherXunit for You?
-
 If your team already uses xUnit and wants to experiment with a BDD approach without drastically changing its workflow, **GherXunit** may be an option to consider. It does not eliminate all BDD challenges but seeks to facilitate its adoption in environments where xUnit is already widely used.
 See more usage examples and implementation details for `Background`, `Rule`, `Features`, and other elements in the [sample code](/src/sample/BddSample/Samples) available in the **GherXunit** repository.
 
