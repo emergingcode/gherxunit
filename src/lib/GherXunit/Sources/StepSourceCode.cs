@@ -1,5 +1,9 @@
 namespace GherXunit.Sources;
 
+/// <summary>
+/// The source code of the methods that are used to execute the Gherkin steps.
+/// This works as a superset of the Xunit methods and it is used to create the custom methods
+/// </summary>
 internal struct StepSourceCode
 {
     public const string SOURCE =

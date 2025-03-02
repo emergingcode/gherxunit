@@ -1,5 +1,8 @@
 namespace GherXunit;
 
+/// <summary>
+/// Source generator that creates the attributes and interfaces used to annotate the Gherkin features.
+/// </summary>
 [Generator]
 public class GherXUnitAttributesGenerator : IIncrementalGenerator
 {
