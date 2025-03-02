@@ -29,14 +29,15 @@ The core idea of **GherXunit** is to allow test scenarios to be written in a str
 #### 📌 Example of Step Implementation:
 ![img.png](docs/img_code2.png)
 
+> [!TIP]  
+> In this example, the `SubscriptionTest` class is split into two files. The first file defines the test scenarios, while the second file defines the step methods. Using `partial` allows both files to contribute to the definition of the same `SubscriptionTest` class.
+
 The result of running the test scenarios defined in the `SubscriptionTest` class would be similar to the following output:
 
 <p align="center">
   <img src="docs/img3.png" alt="img.png" width="900px"/>
 </p>
 
-> [!TIP]  
-> In this example, the `SubscriptionTest` class is split into two files. The first file defines the test scenarios, while the second file defines the step methods. Using `partial` allows both files to contribute to the definition of the same `SubscriptionTest` class.
 
 See more usage examples and implementation details for `Background`, `Rule`, `Features`, and other elements in the [sample code](/src/sample/BddSample/Samples) available in the **GherXunit** repository.
 

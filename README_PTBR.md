@@ -29,14 +29,15 @@ A ideia central do **GherXunit** é permitir que cenários de testes sejam escri
 #### 📌 Exemplo de Implementação de Passos:
 ![img.png](docs/img_code2.png)
 
+> [!TIP]  
+> Neste exemplo, a classe `SubscriptionTest` é dividida em dois arquivos. O primeiro arquivo define os cenários de teste, enquanto o segundo arquivo define os métodos de passos. O uso de `partial` permite que ambos os arquivos contribuam para a definição da mesma classe `SubscriptionTest`.
+
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
 
 <p align="center" style="padding: 35px">
-  <img src="docs/img3.png" alt="img.png" width="1386"/>
+  <img src="docs/img3.png" alt="img.png" width="900px"/>
 </p>
 
-> [!TIP]  
-> Neste exemplo, a classe `SubscriptionTest` é dividida em dois arquivos. O primeiro arquivo define os cenários de teste, enquanto o segundo arquivo define os métodos de passos. O uso de `partial` permite que ambos os arquivos contribuam para a definição da mesma classe `SubscriptionTest`.
 
 Veja mais exemplos de uso e detalhes de implementação de `Background`, `Rule`, `Features` e outros elementos
 no [código exemplo](/src/sample/BddSample/Samples) disponível no repositório do GherXUnit.
