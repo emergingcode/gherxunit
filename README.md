@@ -43,14 +43,13 @@ The result of running the test scenarios defined in the `SubscriptionTest` class
   <img src="docs/img3.png" alt="img.png" width="1386"/>
 </p>
 
-
-See more usage examples and implementation details for `Background`, `Rule`, `Features`, and other elements in the [sample code](/src/sample/BddSample/Samples) available in the **GherXunit** repository.
+<br>
 
 ### 🔎 Is GherXunit for You?
 
 If your team already uses xUnit and wants to experiment with a BDD approach without drastically changing its workflow, **GherXunit** may be an option to consider. It does not eliminate all BDD challenges but seeks to facilitate its adoption in environments where xUnit is already widely used.
+See more usage examples and implementation details for `Background`, `Rule`, `Features`, and other elements in the [sample code](/src/sample/BddSample/Samples) available in the **GherXunit** repository.
 
-💬 What do you think about this approach? Has your team adopted BDD? Let's exchange ideas in the comments! 🚀
 
 ## 📚 References
 

@@ -42,15 +42,14 @@ O resultado da execução dos cenários de teste definidos na classe `Subscripti
 <p align="center">
   <img src="docs/img3.png" alt="img.png" width="1386"/>
 </p>
-
-Veja mais exemplos de uso e detalhes de implementação de `Background`, `Rule`, `Features` e outros elementos
-no [código exemplo](/src/sample/BddSample/Samples) disponível no repositório do GherXUnit.
+<br>
 
 ### 🔎 O GherXunit é para você?
 
 Se a sua equipe já usa xUnit e deseja experimentar uma abordagem mais próxima do BDD, sem mudar drasticamente seu fluxo de trabalho, o GherXunit pode ser uma opção a considerar. Ele não elimina todos os desafios do BDD, mas busca facilitar sua adoção em ambientes onde o xUnit já é amplamente utilizado.
+Veja mais exemplos de uso e detalhes de implementação de `Background`, `Rule`, `Features` e outros elementos
+no [código exemplo](/src/sample/BddSample/Samples) disponível no repositório do GherXUnit.
 
-💬 O que você acha dessa abordagem? Sua equipe já adotou BDD? Vamos trocar ideias nos comentários! 🚀
 
 ## 📚 Referências
 
