@@ -31,7 +31,9 @@ A ideia central do GherXUnit é permitir que cenários de testes sejam escritos 
 
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
 
-![img.png](docs/img3.png)
+<p align="center" style="padding: 35px">
+  <img src="docs/img3.png" alt="img.png" width="1386"/>
+</p>
 
 > [!TIP]  
 > Neste exemplo, a classe `SubscriptionTest` é dividida em dois arquivos. O primeiro arquivo define os cenários de teste, enquanto o segundo arquivo define os métodos de passos. O uso de `partial` permite que ambos os arquivos contribuam para a definição da mesma classe `SubscriptionTest`.
