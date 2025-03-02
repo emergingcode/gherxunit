@@ -10,16 +10,6 @@ internal struct StepSourceCode
         
         namespace GherXunit.Annotations;
         
-        /// <summary>
-        /// Async Methods for Gherkin Steps
-        /// Each step starts with Given, When, Then, And, or But.
-        /// Cucumber executes each step in a scenario one at a time, in the sequence you’ve written them in.
-        /// When Cucumber tries to execute a step, it looks for a matching step definition to execute.
-        /// Keywords are not taken into account when looking for a step definition.
-        /// This means you cannot have a Given, When, Then, And or But step with the same text as another step.
-        /// See the <see href="https://cucumber.io/docs/gherkin/reference#steps">cucumber.io</see> documentation
-        /// or <see href="https://dannorth.net/introducing-bdd/">introducing-bdd</see> page for more information.
-        /// </summary>
         internal static partial class GherXunitSteps
         {
             /// <summary>
@@ -149,16 +139,17 @@ internal struct StepSourceCode
         
             private static string Highlights(this string steps, bool isException = false)
             {
-                var color = isException ? "\u001b[31m" : "\u001b[38;5;82m";
-        
+                var colorB = isException ? "\u001b[31m" : "\u001b[38;5;82m";
+                const string colorE = "\u001b[0m";
+                
                 var replacements = new Dictionary<string, string>
                 {
-                    { "Given", $"{color}GIVEN\u001b[0m" },
-                    { "When", $"{color}WHEN\u001b[0m" },
-                    { "Then", $"{color}THEN\u001b[0m" },
-                    { "And", $"{color}AND\u001b[0m" },
-                    { "<<", $"\u001b[35m" },
-                    { ">>", $"\u001b[0m" }
+                    { "Given", $"{colorB}GIVEN{colorE}" },
+                    { "When", $"{colorB}WHEN{colorE}" },
+                    { "Then", $"{colorB}THEN{colorE}" },
+                    { "And", $"{colorB}AND{colorE}" },
+                    { "<<", "\u001b[35m" },
+                    { ">>", "\u001b[0m" }
                 };
         
                 var sb = new StringBuilder(steps);

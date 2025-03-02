@@ -9,7 +9,7 @@ public partial class SubscriptionTest
     async Task WhenFriedaLogs() => await this.ExecuteAscync(
         refer: WhenFriedaLogsSteps,
         steps: """
-               Given Free Frieda has a free subscription
+               Given Free <<Frieda>> has a <<free subscription>>
                When Free Frieda logs in with her valid credentials
                Then she sees a Free article
                """);
@@ -18,7 +18,7 @@ public partial class SubscriptionTest
     void WhenPattyLogs() => this.Execute(
         refer: WhenPattyLogsSteps,
         steps: """
-               Given Paid Patty has a basic-level paid subscription
+               Given Paid <<Patty>> has a basic-level <<paid subscription>>
                When Paid Patty logs in with her valid credentials
                Then she sees a Free article and a Paid article
                """);

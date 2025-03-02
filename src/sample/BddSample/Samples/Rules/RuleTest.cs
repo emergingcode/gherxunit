@@ -9,7 +9,6 @@ public partial class RuleTest
     [Example("Only One -- One alive")]
     async Task Example01() => await this.NonExecutableAsync(
         steps: """
-               Example: Only One -- One alive
                Given there are <<3>> ninjas
                And there are more than one ninja alive
                When 2 ninjas meet, they will fight
@@ -20,7 +19,6 @@ public partial class RuleTest
     [Example("There can be only One")]
     void Example02() => this.NonExecutable(
         steps: """
-               Example: Only One -- One alive
                Given there is only 1 ninja alive
                Then they will live forever ;-)
                """);
@@ -32,7 +30,6 @@ public partial class RuleTest
     [Example("Two -- Dead and Reborn as Phoenix")]
     async Task Example03() => await this.NonExecutableAsync(
         steps: """
-               Example: Only One -- One alive
                Given there are <<3>> ninjas
                And there are more than one ninja alive
                When 2 ninjas meet, they will fight
@@ -43,7 +40,6 @@ public partial class RuleTest
     [Example("There can be only One")]
     void Example04() => this.NonExecutable(
         steps: """
-               Example: Only One -- One alive
                Given there is only 1 ninja alive
                Then they will live forever ;-)
                """);
