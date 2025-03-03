@@ -10,10 +10,9 @@ internal struct StepSourceCode
         """
         #nullable enable
         using System.Reflection;
-        using System.Text;
-        
+
         namespace GherXunit.Annotations;
-        
+
         internal static partial class GherXunitSteps
         {
             /// <summary>
@@ -43,7 +42,7 @@ internal struct StepSourceCode
             public static async Task ExecuteAscync(this IGherXunit feature, Delegate refer, object[] param, string steps)
                 => await ExecuteAscync(feature, refer.Method, steps, param);
         }
-        
+
         /// <summary>
         /// # Sync Methods for Gherkin Steps
         /// See the <see href="https://cucumber.io/docs/gherkin/reference#steps">cucumber.io</see> documentation
@@ -78,7 +77,7 @@ internal struct StepSourceCode
             public static void Execute(this IGherXunit feature, Delegate refer, object[] param, string steps)
                 => Execute(feature, refer.Method, steps, param);
         }
-        
+
         /// <summary>
         /// Base Methods for Gherkin Steps
         /// See the <see href="https://cucumber.io/docs/gherkin/reference#steps">cucumber.io</see> documentation
@@ -93,7 +92,7 @@ internal struct StepSourceCode
             /// <param name="steps">Steps executed</param>
             public static void NonExecutable(this IGherXunit feature, string? steps = null)
             {
-                if (steps is not null) feature.Output.WriteLine(steps.Highlights());
+                if (steps is not null) feature.Write(steps);
             }
         
             /// <summary>
@@ -103,20 +102,20 @@ internal struct StepSourceCode
             /// <param name="steps">Steps executed</param>    
             public static Task NonExecutableAsync(this IGherXunit feature, string? steps = null)
             {
-                if (steps is not null) feature.Output.WriteLine(steps.Highlights());
+                if (steps is not null) feature.Write(steps);
                 return Task.CompletedTask;
             }
-            
+        
             private static void Execute(this IGherXunit feature, MethodInfo? method, string steps, params object?[] param)
             {
                 try
                 {
                     method?.Invoke(feature, param);
-                    feature.Output.WriteLine(steps.Highlights());
+                    feature.Write(steps);
                 }
                 catch (Exception)
                 {
-                    feature.Output.WriteLine(steps.Highlights(true));
+                    feature.Write(steps, true);
                     throw;
                 }
             }
@@ -132,37 +131,19 @@ internal struct StepSourceCode
                         await task;
                     }
         
-                    feature.Output.WriteLine(steps.Highlights());
+                    feature.Write(steps);
                 }
                 catch (Exception)
                 {
-                    feature.Output.WriteLine(steps.Highlights(true));
+                    feature.Write(steps, true);
                     throw;
                 }
             }
         
-            private static string Highlights(this string steps, bool isException = false)
+            private static void Write(this IGherXunit feature, string steps, bool isException = false)
             {
-                var colorB = isException ? "\u001b[31m" : "\u001b[38;5;82m";
-                const string colorE = "\u001b[0m";
-                
-                var replacements = new Dictionary<string, string>
-                {
-                    { "Given", $"{colorB}GIVEN{colorE}" },
-                    { "When", $"{colorB}WHEN{colorE}" },
-                    { "Then", $"{colorB}THEN{colorE}" },
-                    { "And", $"{colorB}AND{colorE}" },
-                    { "<<", "\u001b[35m" },
-                    { ">>", "\u001b[0m" }
-                };
-        
-                var sb = new StringBuilder(steps);
-                foreach (var replacement in replacements)
-                {
-                    sb.Replace(replacement.Key, replacement.Value);
-                }
-        
-                return sb.ToString();
+                feature.Output.WriteLine(isException ? "🔴 TEST FAIL" : "🟢 TEST OK");
+                feature.Output.WriteLine(steps);
             }
         }
         """;

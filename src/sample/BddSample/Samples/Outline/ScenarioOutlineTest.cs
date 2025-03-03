@@ -12,9 +12,9 @@ public partial class ScenarioOutlineTest
         refer: Step01, 
         param: [start, eat, left],
         steps: $"""
-                Given there are <<{start}>> cucumbers
-                When I eat <<{eat}>> cucumbers
-                Then I should have <<{left}>> cucumbers
+                Given there are {start} cucumbers
+                When I eat {eat} cucumbers
+                Then I should have {left} cucumbers
                 """);
     
     [ScenarioOutline("eating")]
@@ -24,8 +24,8 @@ public partial class ScenarioOutlineTest
         refer: Step01, 
         param: [start, eat, left],
         steps: $"""
-                Given there are <<{start}>> cucumbers
-                When I eat <<{eat}>> cucumbers
-                Then I should have <<{left}>> cucumbers
+                Given there are {start} cucumbers
+                When I eat {eat} cucumbers
+                Then I should have {left} cucumbers
                 """);    
 }
