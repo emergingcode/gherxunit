@@ -1,6 +1,6 @@
 # 🚀 GherXUnit: An Alternative for BDD with xUnit
 [🇧🇷 Versão em Português](README_PTBR.md) | [🇬🇧 English Version](README.md)  
-[![NuGet](https://img.shields.io/nuget/v/C4Sharp.svg)](https://www.nuget.org/packages/C4Sharp)
+[![NuGet](https://img.shields.io/nuget/v/GherXunit.svg)](https://www.nuget.org/packages/GherXunit)
 
 The adoption of Behavior-Driven Development (BDD) has become increasingly common in software development, promoting better communication between technical and non-technical teams. However, its integration with traditional testing frameworks is not always straightforward.
 
@@ -11,7 +11,6 @@ The adoption of Behavior-Driven Development (BDD) has become increasingly common
 > - **Complex automation**: Integration with external tools can increase configuration and test execution complexity.
 > - **Difficult maintenance**: As the test base grows, Gherkin scenarios can become hard to manage.
 > - **Learning curve**: The need to master new tools can hinder BDD adoption, especially in teams already familiar with traditional frameworks.
-
 
 ### ✅ Where Can GherXunit Help?
 
@@ -51,10 +50,8 @@ The following code snippet shows the implementation of the step methods for the 
 The result of running the test scenarios defined in the `SubscriptionTest` class would be similar to the following output:
 
 <p align="center">
-  <img src="docs/img3.png" alt="img.png" width="1386"/>
+  <img src="docs/img3.png" alt="img.png" width="1371"/>
 </p>
-
-<br>
 
 ### 🔎 Is GherXunit for You?
 If your team already uses xUnit and wants to experiment with a BDD approach without drastically changing its workflow, **GherXunit** may be an option to consider. It does not eliminate all BDD challenges but seeks to facilitate its adoption in environments where xUnit is already widely used.

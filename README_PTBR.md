@@ -50,9 +50,8 @@ O trecho de código a seguir mostra a implementação dos métodos de passos par
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
 
 <p align="center">
-  <img src="docs/img3.png" alt="img.png" width="1386"/>
+  <img src="docs/img3.png" alt="img.png" width="1371"/>
 </p>
-<br>
 
 ### 🔎 O GherXunit é para você?
 
