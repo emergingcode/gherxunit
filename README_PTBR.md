@@ -4,13 +4,13 @@
 
 A adoção do Behavior-Driven Development (BDD) tem se tornado cada vez mais comum no desenvolvimento de software, promovendo melhor comunicação entre times técnicos e não técnicos. No entanto, sua integração com frameworks tradicionais de testes nem sempre é simples.
 
-O **GherXunit** surge como uma alternativa viável para equipes que desejam explorar os benefícios do BDD dentro da estrutura do xUnit, sem precisar de ferramentas externas como Cucumber ou SpecFlow. Ele atua como um superset de xUnit, permitindo a escrita de testes em Gherkin.
-
 > [!IMPORTANT]  
 > De acordo com o estudo **“Behavior Driven Development: A Systematic Literature Review” (Farooq et al., 2023, IEEE Access)**, algumas dificuldades recorrentes no uso do BDD incluem
 > - **Automação complexa**: A integração com ferramentas externas pode aumentar a complexidade da configuração e execução dos testes.
 > - **Manutenção difícil**: À medida que a base de testes cresce, cenários Gherkin podem se tornar difíceis de gerenciar.
 > - **Curva de aprendizado**: A necessidade de dominar novas ferramentas pode dificultar a adoção do BDD, especialmente em times já acostumados com frameworks tradicionais.
+
+O **GherXunit** surge como uma alternativa viável para equipes que desejam explorar os benefícios do BDD dentro da estrutura do xUnit, sem precisar de ferramentas externas como Cucumber ou SpecFlow. Ele atua como um superset de xUnit, permitindo a escrita de testes em Gherkin.
 
 ### ✅ Onde o GherXunit Pode Ajudar?
 
