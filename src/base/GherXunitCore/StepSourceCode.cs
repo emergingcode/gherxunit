@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace GherXunit.Annotations;
 
-internal static partial class GherXunitSteps
+public static partial class GherXunitSteps
 {
     /// <summary>
     /// Execute the steps in the scenario asynchronously.
@@ -38,7 +38,7 @@ internal static partial class GherXunitSteps
 /// See the <see href="https://cucumber.io/docs/gherkin/reference#steps">cucumber.io</see> documentation
 /// or <see href="https://dannorth.net/introducing-bdd/">introducing-bdd</see> page for more information.
 /// </summary>
-internal static partial class GherXunitSteps
+public static partial class GherXunitSteps
 {
     /// <summary>
     /// Execute the steps in the scenario synchronously.
@@ -73,7 +73,7 @@ internal static partial class GherXunitSteps
 /// See the <see href="https://cucumber.io/docs/gherkin/reference#steps">cucumber.io</see> documentation
 /// or <see href="https://dannorth.net/introducing-bdd/">introducing-bdd</see> page for more information.
 /// </summary>
-internal static partial class GherXunitSteps
+public static partial class GherXunitSteps
 {
     /// <summary>
     /// Just output the steps in the scenario.

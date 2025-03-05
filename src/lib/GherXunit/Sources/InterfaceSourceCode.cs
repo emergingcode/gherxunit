@@ -13,12 +13,12 @@ internal struct InterfaceSourceCode
 
         namespace GherXunit.Annotations;
 
-        internal interface IGherXunitBackground<T>:IGherXunit, IClassFixture<T> where T : class
+        public interface IGherXunitBackground<T> : IGherXunit, IClassFixture<T> where T : class
         {
             void Setup();
         }
 
-        internal interface IGherXunit
+        public interface IGherXunit
         {
             public ITestOutputHelper Output { get; }
         }
