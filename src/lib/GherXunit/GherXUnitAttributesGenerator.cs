@@ -1,3 +1,5 @@
+using GherXunit.Annotations;
+
 namespace GherXunit;
 
 /// <summary>

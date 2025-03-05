@@ -1,10 +1,10 @@
-namespace GherXunit.Sources;
+namespace GherXunit.Annotations;
 
 /// <summary>
 /// The source code of the interfaces that are used to annotate the Gherkin features.
 /// It's
 /// </summary>
-internal struct InterfaceSourceCode
+public struct InterfaceSourceCode
 {
     public const string SOURCE =
         """

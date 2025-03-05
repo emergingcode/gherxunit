@@ -1,11 +1,11 @@
-namespace GherXunit.Sources;
+namespace GherXunit.Annotations;
 
 /// <summary>
 /// The source code of the attributes that are used to annotate the Gherkin features.
 /// This works as a superset of the Xunit attributes and it is used to create the custom attributes
 /// that are used to annotate the Gherkin features.
 /// </summary>
-internal struct AttributeSourceCode
+public struct AttributeSourceCode
 {
     public const string SOURCE =
         """
