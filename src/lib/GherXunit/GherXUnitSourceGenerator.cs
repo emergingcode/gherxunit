@@ -1,12 +1,10 @@
-using GherXunit.Annotations;
-
-namespace GherXunit;
+namespace GherXunit.Annotations;
 
 /// <summary>
 /// Source generator that creates the attributes and interfaces used to annotate the Gherkin features.
 /// </summary>
 [Generator]
-public class GherXUnitAttributesGenerator : IIncrementalGenerator
+public class GherXUnitSourceGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -17,9 +15,9 @@ public class GherXUnitAttributesGenerator : IIncrementalGenerator
             var hasXUnitReference = references.Any(reference => reference.Name.ToLower().Contains("xunit"));
             
             if (!hasXUnitReference) return;
-            spc.AddSource("GherXUnitInterfaces.g.cs", SourceText.From(InterfaceSourceCode.SOURCE, Encoding.UTF8));
-            spc.AddSource("GherXUnitSteps.g.cs", SourceText.From(StepSourceCode.SOURCE, Encoding.UTF8));
-            spc.AddSource("GherXUnitAnnotations.g.cs", SourceText.From(AttributeSourceCode.SOURCE, Encoding.UTF8));
+            spc.AddSource("GherXUnitInterfaces.g.cs", SourceText.From(GherXunitInterfaces.SOURCE, Encoding.UTF8));
+            spc.AddSource("GherXUnitSteps.g.cs", SourceText.From(GherXunitExecution.SOURCE, Encoding.UTF8));
+            spc.AddSource("GherXUnitAnnotations.g.cs", SourceText.From(GherXunitAttributes.SOURCE, Encoding.UTF8));
         });
     }
 }

@@ -4,9 +4,9 @@ namespace GherXunit.Annotations;
 /// The source code of the methods that are used to execute the Gherkin steps.
 /// This works as a superset of the Xunit methods and it is used to create the custom methods
 /// </summary>
-public struct StepSourceCode
+public struct GherXunitExecution
 {
-    public const string SOURCE =
+    internal const string SOURCE =
         """
         #nullable enable
         using System.Reflection;

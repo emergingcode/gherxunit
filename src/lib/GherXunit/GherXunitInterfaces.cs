@@ -4,9 +4,9 @@ namespace GherXunit.Annotations;
 /// The source code of the interfaces that are used to annotate the Gherkin features.
 /// It's
 /// </summary>
-public struct InterfaceSourceCode
+public struct GherXunitInterfaces
 {
-    public const string SOURCE =
+    internal const string SOURCE =
         """
         #nullable enable
         using Xunit.Abstractions;

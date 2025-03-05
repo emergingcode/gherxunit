@@ -5,9 +5,9 @@ namespace GherXunit.Annotations;
 /// This works as a superset of the Xunit attributes and it is used to create the custom attributes
 /// that are used to annotate the Gherkin features.
 /// </summary>
-public struct AttributeSourceCode
+public struct GherXunitAttributes
 {
-    public const string SOURCE =
+    internal const string SOURCE =
         """
         #nullable enable
         global using Examples = Xunit.InlineDataAttribute;
