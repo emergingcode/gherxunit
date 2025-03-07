@@ -89,17 +89,21 @@ public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
 #### 📌 Exemplo de saída destacando os resultados dos testes:
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
 
-```gherkindotnet
-✅ Dr. Bill posts to his own blog
-GIVEN a global administrator named <<"Greg">>
-  AND a blog named <<"Greg's anti-tax rants">>
-  AND a customer named <<"Dr. Bill">>
-  AND a blog named <<"Expensive Therapy">> owned by <<"Dr. Bill">>
+```shell
+11:11:49.683 |V| Run: 0821bae4-1a1a-447b-807e-2eb5042f1fe5 - Discovery result processing started
+11:11:49.688 |V| Run: 0821bae4-1a1a-447b-807e-2eb5042f1fe5 - Discovery result processing finished: (+0 ~2 -0), interrupted: 0
+11:11:49.879 |I| Process /usr/local/share/dotnet/x64/dotnet:21042 has exited with code (0)
+11:11:49.879 |I| Output stream: 
 
-✅ Dr. Bill posts to his own blog
-GIVEN I am logged in as Dr. Bill
- WHEN I try to post to "Expensive Therapy"
- THEN I should see "Your article was published."
+SCENARIO ⇲ [🟢]Free subscribers see only the free articles
+   GIVEN ⇲ Free Frieda has a free subscription
+    WHEN ⇲ Free Frieda logs in with her valid credentials
+    THEN ⇲ she sees a Free article
+
+SCENARIO ⇲ [🔴]Subscriber with a paid subscription can access both free and paid articles
+   GIVEN ⇲ Paid Patty has a basic-level paid subscription
+    WHEN ⇲ Paid Patty logs in with her valid credentials
+    THEN ⇲ she sees a Free article and a Paid article
 ```
 
 ### 🔎 O GherXunit é para você?

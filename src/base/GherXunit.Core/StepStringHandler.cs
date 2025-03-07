@@ -15,9 +15,10 @@ public ref struct StepStringHandler()
     private string HighlightKeyword(string input)
     {
         return input
-            .Replace("Given", "GIVEN".PadLeft(5)) // Verde
-            .Replace("When",  "WHEN".PadLeft(5)) // Azul
-            .Replace("Then",  "THEN".PadLeft(5)) // Amarelo
-            .Replace("And",   "AND".PadLeft(5)); // Ciano
+            .Replace("Scenario", $"{"SCENARIO",8} ⇲") // Verde
+            .Replace("Given", $"{"GIVEN",8} ⇲") // Verde
+            .Replace("When", $"{"WHEN",8} ⇲") // Azul
+            .Replace("Then", $"{"THEN",8} ⇲") // Amarelo
+            .Replace("And", $"{"AND",8} ⇲"); // Ciano
     }
 }

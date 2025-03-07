@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BddSample", "sample\BddSamp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{B014B043-DFB5-4827-8775-D4E5326130F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GherXunitCore", "base\GherXunitCore\GherXunitCore.csproj", "{5477E886-B647-4A5D-A522-2978AF9F748D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GherXunit.Core", "base\GherXunit.Core\GherXunit.Core.csproj", "{5477E886-B647-4A5D-A522-2978AF9F748D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
