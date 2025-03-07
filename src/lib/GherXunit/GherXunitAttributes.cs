@@ -16,30 +16,22 @@ public struct GherXunitAttributes
         
         namespace GherXunit.Annotations;
         
-        public class FeatureAttribute(string description) : DescriptionAttribute($"Feature: {description}");
+        public sealed class FeatureAttribute(string description) : DescriptionAttribute($"Feature: {description}");
+        public sealed class RuleAttribute(string description) : DescriptionAttribute($"Rule: {description}");
+        public sealed class BackgroundAttribute() : DescriptionAttribute("Background");
+        public sealed class ScenarioAttribute(string displayName) : GherXunitCustomFactAttribute(displayName);
+        public sealed class ExampleAttribute(string displayName) : GherXunitCustomFactAttribute(displayName);
+        public sealed class ScenarioOutlineAttribute(string displayName) : GherXunitCustomTheoryAttribute(displayName);
+        public sealed class ScenariosAttribute(string displayName) : GherXunitCustomTheoryAttribute(displayName);
         
-        public class RuleAttribute(string description) : DescriptionAttribute($"Rule: {description}");
-        
-        public class BackgroundAttribute() : DescriptionAttribute("Background");
-        
-        public sealed class ScenarioAttribute : FactAttribute
+        public class GherXunitCustomFactAttribute(string displayName) : FactAttribute
         {
-            public ScenarioAttribute(string displayName) => DisplayName = displayName;
+            public override string DisplayName { get; set; } = displayName;
         }
         
-        public sealed class ExampleAttribute : FactAttribute
+        public class GherXunitCustomTheoryAttribute(string displayName) : TheoryAttribute
         {
-            public ExampleAttribute(string displayName) => DisplayName = displayName;
-        }
-        
-        public sealed class ScenarioOutlineAttribute : TheoryAttribute
-        {
-            public ScenarioOutlineAttribute(string displayName) => DisplayName = displayName;
-        }
-        
-        public sealed class ScenariosAttribute : TheoryAttribute
-        {
-            public ScenariosAttribute(string displayName) => DisplayName = displayName;
+            public override string DisplayName { get; set; } = displayName;
         }
         """;
 }

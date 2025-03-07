@@ -1,10 +1,10 @@
-using FluentAssertions;
+using System.Runtime.CompilerServices;
 using GherXunit.Annotations;
 using Xunit.Abstractions;
 
 namespace BddTests.Samples.Backgrounds;
 
-public partial class BackgroundTest : IGherXunitBackground<BackgroundContext>
+public partial class BackgroundTest : IGherXunit<BackgroundContext>
 {
     public ITestOutputHelper Output { get; }
     private BackgroundContext Context { get; }
@@ -22,19 +22,19 @@ public partial class BackgroundTest : IGherXunitBackground<BackgroundContext>
     private async Task DrBillPostToBlogStep()
     {
         var result = await PostToBlog("Dr. Bill", "Expensive Therapy");
-        result.Should().Be("Your article was published.");
+        Assert.Equal("Your article was published.", result);
     }
     
     private async Task DrBillPostToBlogFailStep()
     {
         var result = await PostToBlog("Dr. Bill", "Greg's anti-tax rants");
-        result.Should().Be("Hey! That's not your blog!");
+        Assert.Equal("Hey! That's not your blog!", result);
     }
 
     private async Task GregPostToBlogStep()
     {
         var result = await PostToBlog("Greg", "Greg's anti-tax rants");
-        result.Should().Be("Your article was published.");
+        Assert.Equal("Your article was published.", result);
     }
 
     private async Task<string> PostToBlog(string owner, string blog)

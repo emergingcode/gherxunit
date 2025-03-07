@@ -15,8 +15,10 @@ public class GherXUnitSourceGenerator : IIncrementalGenerator
             var hasXUnitReference = references.Any(reference => reference.Name.ToLower().Contains("xunit"));
             
             if (!hasXUnitReference) return;
+            
+            spc.AddSource("GherXunitStepStringHandler.g.cs", SourceText.From(GherXunitStepStringHandler.SOURCE, Encoding.UTF8));
             spc.AddSource("GherXUnitInterfaces.g.cs", SourceText.From(GherXunitInterfaces.SOURCE, Encoding.UTF8));
-            spc.AddSource("GherXUnitSteps.g.cs", SourceText.From(GherXunitExecution.SOURCE, Encoding.UTF8));
+            spc.AddSource("GherXUnitSteps.g.cs", SourceText.From(GherXunitExecutedSteps.SOURCE, Encoding.UTF8));
             spc.AddSource("GherXUnitAnnotations.g.cs", SourceText.From(GherXunitAttributes.SOURCE, Encoding.UTF8));
         });
     }
