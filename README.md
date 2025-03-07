@@ -37,21 +37,68 @@ The following sections provide examples of how to define test scenarios and impl
 
 #### 📌 Example of Scenario Definition:
 The following code snippet shows a test scenario defined using Gherkin syntax in a class named `SubscriptionTest`:
-![img.png](docs/img_code1.png)
+
+```csharp
+using GherXunit.Annotations;
+
+namespace BddTests.Samples.Features;
+
+[Feature("Subscribers see different articles based on their subscription level")]
+public partial class SubscriptionTest
+{
+    [Scenario("Free subscribers see only the free articles")]
+    async Task WhenFriedaLogs() => await this.ExecuteAscync(
+        refer: WhenFriedaLogsSteps,
+        steps: """
+               Given Free Frieda has a free subscription
+               When Free Frieda logs in with her valid credentials
+               Then she sees a Free article
+               """);
+
+    [Scenario("Subscriber with a paid subscription can access both free and paid articles")]
+    void WhenPattyLogs() => this.Execute(
+        refer: WhenPattyLogsSteps,
+        steps: """
+               Given Paid Patty has a basic-level paid subscription
+               When Paid Patty logs in with her valid credentials
+               Then she sees a Free article and a Paid article
+               """);
+}
+```
 
 #### 📌 Example of Step Implementation:
 The following code snippet shows the implementation of the step methods for the test scenario defined in the `SubscriptionTest` class:
-![img.png](docs/img_code2.png)
+```csharp
+using GherXunit.Annotations;
+using Xunit.Abstractions;
+
+namespace BddTests.Samples.Features;
+
+public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
+{
+    public ITestOutputHelper Output { get; } = output;
+    private void WhenPattyLogsSteps() { }
+    private async Task WhenFriedaLogsSteps() => await Task.CompletedTask;
+}
+```
 
 > [!TIP]  
 > In this example, the `SubscriptionTest` class is split into two files. The first file defines the test scenarios, while the second file defines the step methods. Using `partial` allows both files to contribute to the definition of the same `SubscriptionTest` class.
 
 #### 📌 Example of output highlighting the test results:
 The result of running the test scenarios defined in the `SubscriptionTest` class would be similar to the following output:
+```gherkindotnet
+✅ Dr. Bill posts to his own blog
+GIVEN a global administrator named <<"Greg">>
+  AND a blog named <<"Greg's anti-tax rants">>
+  AND a customer named <<"Dr. Bill">>
+  AND a blog named <<"Expensive Therapy">> owned by <<"Dr. Bill">>
 
-<p align="center">
-  <img src="docs/img3.png" alt="img.png" width="1371"/>
-</p>
+✅ Dr. Bill posts to his own blog
+GIVEN I am logged in as Dr. Bill
+ WHEN I try to post to "Expensive Therapy"
+ THEN I should see "Your article was published."
+```
 
 ### 🔎 Is GherXunit for You?
 If your team already uses xUnit and wants to experiment with a BDD approach without drastically changing its workflow, **GherXunit** may be an option to consider. It does not eliminate all BDD challenges but seeks to facilitate its adoption in environments where xUnit is already widely used.

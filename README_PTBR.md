@@ -37,11 +37,51 @@ As seções a seguir fornecem exemplos de como definir cenários de teste e impl
 
 ####  📌 Exemplo de Definição de Cenário:
 O trecho de código a seguir mostra um cenário de teste definido usando a sintaxe Gherkin em uma classe chamada `SubscriptionTest`:
-![img.png](docs/img_code1.png)
+
+```csharp
+using GherXunit.Annotations;
+
+namespace BddTests.Samples.Features;
+
+[Feature("Subscribers see different articles based on their subscription level")]
+public partial class SubscriptionTest
+{
+    [Scenario("Free subscribers see only the free articles")]
+    async Task WhenFriedaLogs() => await this.ExecuteAscync(
+        refer: WhenFriedaLogsSteps,
+        steps: """
+               Given Free Frieda has a free subscription
+               When Free Frieda logs in with her valid credentials
+               Then she sees a Free article
+               """);
+
+    [Scenario("Subscriber with a paid subscription can access both free and paid articles")]
+    void WhenPattyLogs() => this.Execute(
+        refer: WhenPattyLogsSteps,
+        steps: """
+               Given Paid Patty has a basic-level paid subscription
+               When Paid Patty logs in with her valid credentials
+               Then she sees a Free article and a Paid article
+               """);
+}
+```
 
 #### 📌 Exemplo de Implementação de Passos:
 O trecho de código a seguir mostra a implementação dos métodos de passos para o cenário de teste definido na classe `SubscriptionTest`:
-![img.png](docs/img_code2.png)
+
+```csharp
+using GherXunit.Annotations;
+using Xunit.Abstractions;
+
+namespace BddTests.Samples.Features;
+
+public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
+{
+    public ITestOutputHelper Output { get; } = output;
+    private void WhenPattyLogsSteps() { }
+    private async Task WhenFriedaLogsSteps() => await Task.CompletedTask;
+}
+```
 
 > [!TIP]  
 > Neste exemplo, a classe `SubscriptionTest` é dividida em dois arquivos. O primeiro arquivo define os cenários de teste, enquanto o segundo arquivo define os métodos de passos. O uso de `partial` permite que ambos os arquivos contribuam para a definição da mesma classe `SubscriptionTest`.
@@ -49,9 +89,18 @@ O trecho de código a seguir mostra a implementação dos métodos de passos par
 #### 📌 Exemplo de saída destacando os resultados dos testes:
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
 
-<p align="center">
-  <img src="docs/img3.png" alt="img.png" width="1371"/>
-</p>
+```gherkindotnet
+✅ Dr. Bill posts to his own blog
+GIVEN a global administrator named <<"Greg">>
+  AND a blog named <<"Greg's anti-tax rants">>
+  AND a customer named <<"Dr. Bill">>
+  AND a blog named <<"Expensive Therapy">> owned by <<"Dr. Bill">>
+
+✅ Dr. Bill posts to his own blog
+GIVEN I am logged in as Dr. Bill
+ WHEN I try to post to "Expensive Therapy"
+ THEN I should see "Your article was published."
+```
 
 ### 🔎 O GherXunit é para você?
 

@@ -1,5 +1,4 @@
 ﻿using GherXunit.Annotations;
-using Xunit.Abstractions;
 
 namespace BddTests.Samples.Features;
 
