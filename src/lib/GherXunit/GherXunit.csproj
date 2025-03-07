@@ -7,7 +7,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <PackageId>GherXunit</PackageId>
-        <Version>1.0.0</Version>
+        <Version>1.1.0</Version>
         <Authors>Yan Justino</Authors>
         <Company>Emergingcode</Company>
         <Description>GherXunit emerges as a viable alternative for those seeking an approach that combines the expressiveness of BDD with the well-established structure of xUnit.</Description>

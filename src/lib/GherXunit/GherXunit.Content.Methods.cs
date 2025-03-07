@@ -4,7 +4,7 @@ namespace GherXunit.Annotations;
 /// The source code of the methods that are used to execute the Gherkin steps.
 /// This works as a superset of the Xunit methods and it is used to create the custom methods
 /// </summary>
-public struct GherXunitExecutedSteps
+public struct GherXunitMethods
 {
     internal const string SOURCE =
         """
@@ -12,22 +12,25 @@ public struct GherXunitExecutedSteps
         using System.Reflection;
         using Xunit.Abstractions;
         using Xunit.Sdk;
-        
+
         namespace GherXunit.Annotations;
-        
+
         public static class GherXunitSteps
         {
+            // Async methods
             public static async Task ExecuteAscync(this IGherXunitStep feature, string steps) => await ExecuteAscync(feature, null, steps, []);
             public static async Task ExecuteAscync(this IGherXunitStep feature, Delegate refer, string steps) => await ExecuteAscync(feature, refer.Method, steps);
             public static async Task ExecuteAscync(this IGherXunitStep feature, Delegate refer, object[] param, string steps) => await ExecuteAscync(feature, refer.Method, steps, param);
-            public static async Task NonExecutableAsync(this IGherXunitStep feature, string? steps = null) => await feature.WriteAsync(null, steps);
+            public static async Task NonExecutableAsync(this IGherXunitStep feature, string? steps = null) => await ExecuteAscync(feature, null, steps, []);
         
+            // Sync methods
             public static void Execute(this IGherXunitStep feature, string steps) => Execute(feature, null, steps, []);
             public static void Execute(this IGherXunitStep feature, Delegate refer, string steps) => Execute(feature, refer.Method, steps);
             public static void Execute(this IGherXunitStep feature, Delegate refer, object[] param, string steps) => Execute(feature, refer.Method, steps, param);
-            public static void NonExecutable(this IGherXunitStep feature, string? steps) => feature.Write(null, steps);
+            public static void NonExecutable(this IGherXunitStep feature, string? steps) => Execute(feature, null, steps, []);
         
-            private static void Execute(this IGherXunitStep feature, MethodInfo? method, string steps, params object?[] param)
+            // Private methods
+            private static void Execute(this IGherXunitStep feature, MethodInfo? method, string? steps, params object?[] param)
             {
                 try
                 {
@@ -41,62 +44,54 @@ public struct GherXunitExecutedSteps
                 }
             }
         
-            private static async Task ExecuteAscync(this IGherXunitStep feature, MethodInfo? method, string steps, params object?[] param)
+            private static async Task ExecuteAscync(this IGherXunitStep feature, MethodInfo? method, string? steps,
+                params object?[] param)
             {
                 try
                 {
                     var task = method is null ? Task.CompletedTask : (Task)method.Invoke(feature, param)!;
                     await task;
         
-                    await feature.WriteAsync(method?.Name, steps);
+                    feature.Write(method?.Name, steps);
                 }
                 catch (Exception)
                 {
-                    await feature.WriteAsync(method?.Name, steps, true);
+                    feature.Write(method?.Name, steps, true);
                     throw;
                 }
             }
         
-            private static async Task WriteAsync(this IGherXunitStep feature, string? methodName, string? steps, bool isException = false)
-            {
-                if (steps is null) return;
-                Write(feature, methodName, steps, isException);
-                await Task.Yield();
-            }
-        
             private static void Write(this IGherXunitStep feature, string? methodName, string? steps, bool isException = false)
             {
-                var status = isException ? "\u274c" : "\u2705";
-        
                 if (steps is null) return;
+        
+                var status = isException ? "🔴" : "🟢";
+                var iTest = GetTest(feature, out var output);
+        
+                var display = iTest is null
+                    ? $"Scenario [{status}]{methodName}\r\n{steps}"
+                    : $"Scenario [{status}]{iTest.DisplayName}\r\n{steps}";
+        
                 var stepString = new StepStringHandler();
-                stepString.AppendLiteral(steps);
+                stepString.AppendLiteral(display);
         
-                var displayName = methodName is null ? status : $"{status} {methodName}";
-                if (feature is IGherXunit { Output: { } output })
-                {
-                    var iTest = GetTest(output);
-                    displayName = iTest is null ? status : $"{status} {iTest.DisplayName}";
-        
-                    output.WriteLine(displayName);
-                    output.WriteLine(stepString.ToString());
-                    output.WriteLine(string.Empty);
-                }
-        
-                Console.WriteLine(displayName);
-                Console.WriteLine(steps);
+                output?.WriteLine(string.Empty);
+                output?.WriteLine(stepString.ToString());
                 Console.WriteLine(string.Empty);
+                Console.WriteLine(stepString.ToString());
             }
         
-            public static ITest? GetTest(ITestOutputHelper outputHelper)
+            private static ITest? GetTest(IGherXunitStep feature, out ITestOutputHelper? outputHelper)
             {
-                if (outputHelper is not TestOutputHelper testOutputHelper) return null;
-                
-                var testField = 
-                    typeof(TestOutputHelper).GetField("test", BindingFlags.Instance | BindingFlags.NonPublic) ?? 
+                outputHelper = null;
+                if (feature is not IGherXunit { Output: { } output }) return null;
+        
+                var testField =
+                    typeof(TestOutputHelper).GetField("test", BindingFlags.Instance | BindingFlags.NonPublic) ??
                     typeof(TestOutputHelper).GetField("_test", BindingFlags.Instance | BindingFlags.NonPublic);
         
-                return testField?.GetValue(testOutputHelper) as ITest;
+                outputHelper = output;
+                return testField?.GetValue(output) as ITest;
             }
         }
         """;
