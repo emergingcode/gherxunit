@@ -40,9 +40,8 @@ O trecho de código a seguir mostra um cenário de teste definido usando a sinta
 
 ```csharp
 using GherXunit.Annotations;
-
-namespace BddTests.Samples.Features;
-
+...
+    
 [Feature("Subscribers see different articles based on their subscription level")]
 public partial class SubscriptionTest
 {
@@ -70,15 +69,10 @@ public partial class SubscriptionTest
 O trecho de código a seguir mostra a implementação dos métodos de passos para o cenário de teste definido na classe `SubscriptionTest`:
 
 ```csharp
-using GherXunit.Annotations;
-using Xunit.Abstractions;
-
-namespace BddTests.Samples.Features;
-
 public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
 {
     public ITestOutputHelper Output { get; } = output;
-    private void WhenPattyLogsSteps() { }
+    private void WhenPattyLogsSteps() => Assert.True(true);
     private async Task WhenFriedaLogsSteps() => await Task.CompletedTask;
 }
 ```
@@ -90,20 +84,19 @@ public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
 
 ```shell
-11:11:49.683 |V| Run: 0821bae4-1a1a-447b-807e-2eb5042f1fe5 - Discovery result processing started
-11:11:49.688 |V| Run: 0821bae4-1a1a-447b-807e-2eb5042f1fe5 - Discovery result processing finished: (+0 ~2 -0), interrupted: 0
-11:11:49.879 |I| Process /usr/local/share/dotnet/x64/dotnet:21042 has exited with code (0)
-11:11:49.879 |I| Output stream: 
+TEST RESULT: 🟢 SUCCESS
+⤷ FEATURE Subscribers see different articles based on their subscription level
+   ⤷ SCENARIO Free subscribers see only the free articles
+      | GIVEN ↘ Free Frieda has a free subscription
+      |  WHEN ↘ Free Frieda logs in with her valid credentials
+      |  THEN ↘ she sees a Free article
 
-SCENARIO ⇲ [🟢]Free subscribers see only the free articles
-   GIVEN ⇲ Free Frieda has a free subscription
-    WHEN ⇲ Free Frieda logs in with her valid credentials
-    THEN ⇲ she sees a Free article
-
-SCENARIO ⇲ [🔴]Subscriber with a paid subscription can access both free and paid articles
-   GIVEN ⇲ Paid Patty has a basic-level paid subscription
-    WHEN ⇲ Paid Patty logs in with her valid credentials
-    THEN ⇲ she sees a Free article and a Paid article
+TEST RESULT: 🟢 SUCCESS
+⤷ FEATURE Subscribers see different articles based on their subscription level
+   ⤷ SCENARIO Subscriber with a paid subscription can access both free and paid articles
+      | GIVEN ↘ Paid Patty has a basic-level paid subscription
+      |  WHEN ↘ Paid Patty logs in with her valid credentials
+      |  THEN ↘ she sees a Free article and a Paid article
 ```
 
 ### 🔎 O GherXunit é para você?

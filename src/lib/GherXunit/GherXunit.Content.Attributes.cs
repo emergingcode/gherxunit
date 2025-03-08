@@ -17,8 +17,8 @@ public struct GherXunitAttributes
         namespace GherXunit.Annotations;
         
         // Description attributes
-        public sealed class FeatureAttribute(string description) : DescriptionAttribute($"Feature: {description}");
-        public sealed class RuleAttribute(string description) : DescriptionAttribute($"Rule: {description}");
+        public sealed class FeatureAttribute(string description) : DescriptionAttribute(description);
+        public sealed class RuleAttribute(string description) : DescriptionAttribute(description);
         public sealed class BackgroundAttribute() : DescriptionAttribute("Background");
         
         // Xunit attributes

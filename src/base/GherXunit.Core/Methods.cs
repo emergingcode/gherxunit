@@ -8,64 +8,68 @@ namespace GherXunit.Annotations;
 public static class GherXunitSteps
 {
     // Async methods
-    public static async Task ExecuteAscync(this IGherXunitStep feature, string steps) => await ExecuteAscync(feature, null, steps, []);
-    public static async Task ExecuteAscync(this IGherXunitStep feature, Delegate refer, string steps) => await ExecuteAscync(feature, refer.Method, steps);
-    public static async Task ExecuteAscync(this IGherXunitStep feature, Delegate refer, object[] param, string steps) => await ExecuteAscync(feature, refer.Method, steps, param);
-    public static async Task NonExecutableAsync(this IGherXunitStep feature, string? steps = null) => await ExecuteAscync(feature, null, steps, []);
+    public static async Task BackgroundAsync(this IGherXunitStep scenario, Delegate refer, string steps) => await ExecuteAscync(scenario, refer.Method, steps, true);
+    public static async Task ExecuteAscync(this IGherXunitStep scenario, string steps) => await ExecuteAscync(scenario, null, steps, false);
+    public static async Task ExecuteAscync(this IGherXunitStep scenario, Delegate refer, string steps) => await ExecuteAscync(scenario, refer.Method, steps);
+    public static async Task ExecuteAscync(this IGherXunitStep scenario, Delegate refer, object[] param, string steps) => await ExecuteAscync(scenario, refer.Method, steps, false, param);
+    public static async Task NonExecutableAsync(this IGherXunitStep scenario, string? steps = null) => await ExecuteAscync(scenario, null, steps, false);
 
     // Sync methods
-    public static void Execute(this IGherXunitStep feature, string steps) => Execute(feature, null, steps, []);
-    public static void Execute(this IGherXunitStep feature, Delegate refer, string steps) => Execute(feature, refer.Method, steps);
-    public static void Execute(this IGherXunitStep feature, Delegate refer, object[] param, string steps) => Execute(feature, refer.Method, steps, param);
-    public static void NonExecutable(this IGherXunitStep feature, string? steps) => Execute(feature, null, steps, []);
+    public static void Background(this IGherXunitStep scenario, Delegate refer, string steps) => Execute(scenario, refer.Method, steps, true);
+    public static void Execute(this IGherXunitStep scenario, string steps) => Execute(scenario, null, steps, false);
+    public static void Execute(this IGherXunitStep scenario, Delegate refer, string steps) => Execute(scenario, refer.Method, steps);
+    public static void Execute(this IGherXunitStep scenario, Delegate refer, object[] param, string steps) => Execute(scenario, refer.Method, steps, false, param);
+    public static void NonExecutable(this IGherXunitStep feature, string? steps) => Execute(feature, null, steps, false, []);
 
     // Private methods
-    private static void Execute(this IGherXunitStep feature, MethodInfo? method, string? steps, params object?[] param)
+    private static void Execute(this IGherXunitStep scenario, MethodInfo? method, string? steps,
+        bool isBackground = false, params object?[] param)
     {
         try
         {
-            method?.Invoke(feature, param);
-            feature.Write(method?.Name, steps);
+            method?.Invoke(scenario, param);
+            scenario.Write(method?.Name, steps, false, isBackground);
         }
         catch (Exception)
         {
-            feature.Write(method?.Name, steps, true);
+            scenario.Write(method?.Name, steps, true, isBackground);
             throw;
         }
     }
 
-    private static async Task ExecuteAscync(this IGherXunitStep feature, MethodInfo? method, string? steps,
-        params object?[] param)
+    private static async Task ExecuteAscync(this IGherXunitStep scenario, MethodInfo? method, string? steps,
+        bool isBackground = false, params object?[] param)
     {
         try
         {
-            var task = method is null ? Task.CompletedTask : (Task)method.Invoke(feature, param)!;
+            var task = method is null ? Task.CompletedTask : (Task)method.Invoke(scenario, param)!;
             await task;
 
-            feature.Write(method?.Name, steps);
+            scenario.Write(method?.Name, steps, false, isBackground);
         }
         catch (Exception)
         {
-            feature.Write(method?.Name, steps, true);
+            scenario.Write(method?.Name, steps, true, isBackground);
             throw;
         }
     }
 
-    private static void Write(this IGherXunitStep feature, string? methodName, string? steps, bool isException = false)
+    private static void Write(this IGherXunitStep scenario, string? methodName, string? steps, bool isException = false, bool isBackground = false)
     {
         if (steps is null) return;
 
-        var status = isException ? "🔴" : "🟢";
-        var iTest = GetTest(feature, out var output);
+        var iTest = GetTest(scenario, out var output);
+        var featuresText = TryGetFeature(iTest);
+        var statusResult = $"TEST RESULT: {(isException ? "\U0001F534 FAIL" : "\U0001F7E2 SUCCESS")}\r\n";
 
-        var display = iTest is null
-            ? $"Scenario [{status}]{methodName}\r\n{steps}"
-            : $"Scenario [{status}]{iTest.DisplayName}\r\n{steps}";
+        var scenarioText = iTest is null
+            ? $"{(isBackground ? "Background" : "Scenario")} {methodName}\r\n"
+            : $"{(isBackground ? "Background" : "Scenario")} {iTest.DisplayName}\r\n";
 
         var stepString = new StepStringHandler();
-        stepString.AppendLiteral(display);
+        stepString.AppendLiteral($"{statusResult}{featuresText}{scenarioText}{steps}");
 
-        output?.WriteLine(string.Empty);
+        output?.WriteLine(".");
         output?.WriteLine(stepString.ToString());
         Console.WriteLine(string.Empty);
         Console.WriteLine(stepString.ToString());
@@ -82,5 +86,16 @@ public static class GherXunitSteps
 
         outputHelper = output;
         return testField?.GetValue(output) as ITest;
+    }
+
+    private static string? TryGetFeature(ITest? test)
+    {
+        if (test is null) return null;
+
+        var attributes = test.TestCase.TestMethod.TestClass.Class.GetCustomAttributes(typeof(FeatureAttribute));
+        var attribute = attributes.FirstOrDefault();
+
+        var result = attribute?.GetNamedArgument<string>("Description");
+        return result is null ? null : $"Feature {result}\r\n";
     }
 }

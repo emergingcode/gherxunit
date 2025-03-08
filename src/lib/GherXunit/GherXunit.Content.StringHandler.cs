@@ -21,11 +21,13 @@ public struct GherXunitStepStringHandler
             private string HighlightKeyword(string input)
             {
                 return input
-                    .Replace("Scenario", $"{"SCENARIO",8} ⇲") // Verde
-                    .Replace("Given", $"{"GIVEN",8} ⇲") // Verde
-                    .Replace("When", $"{"WHEN",8} ⇲") // Azul
-                    .Replace("Then", $"{"THEN",8} ⇲") // Amarelo
-                    .Replace("And", $"{"AND",8} ⇲"); // Ciano
+                    .Replace("Feature",    $"{"\u2937 FEATURE",8}")
+                    .Replace("Scenario",   $"{"\u2937 SCENARIO",13}")
+                    .Replace("Background", $"{"\u2937 BACKGROUND",15}")
+                    .Replace("Given",      $"{"|",7} {"GIVEN",5} \u2198")
+                    .Replace("When",       $"{"|",7} {"WHEN" ,5} \u2198")
+                    .Replace("Then",       $"{"|",7} {"THEN" ,5} \u2198")
+                    .Replace("And",        $"{"|",7} {"AND"  ,5} \u2198");
             }
         }
         """;
