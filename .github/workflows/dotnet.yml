@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      Version: 1.1.${{ github.run_number }}
+      Version: 1.2.${{ github.run_number }}
       Solution_Path: ./src/GherXunit.sln  
       Project_Path: ./src/lib/GherXunit/GherXunit.csproj
       Package_Path: ./src/lib/GherXunit/**/*.
