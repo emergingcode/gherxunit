@@ -44,6 +44,7 @@ public struct GherXunitStepStringHandler
         public static class Lexers
         {
             public static IGherXunitLexer Default => new DefaultGherXunitLexer();
+            public static IGherXunitLexer EnUs => new DefaultGherXunitLexer();
             public static IGherXunitLexer PtBr => new PtBrGherXunitLexer();
         }
         
