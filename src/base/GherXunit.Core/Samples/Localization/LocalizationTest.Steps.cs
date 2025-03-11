@@ -1,9 +1,9 @@
 using GherXunit.Annotations;
 using Xunit.Abstractions;
 
-namespace BddTests.Samples.Features;
+namespace BddTests.Samples.Localization;
 
-public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
+public partial class LocalizationTest(ITestOutputHelper output): IGherXunit
 {
     public ITestOutputHelper Output { get; } = output;
     private void WhenPattyLogsSteps() => Assert.True(true);

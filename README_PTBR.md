@@ -83,20 +83,87 @@ public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
 #### 📌 Exemplo de saída destacando os resultados dos testes:
 O resultado da execução dos cenários de teste definidos na classe `SubscriptionTest` seria semelhante à saída a seguir:
 
-```shell
+```gherkindotnet
 TEST RESULT: 🟢 SUCCESS
 ⤷ FEATURE Subscribers see different articles based on their subscription level
-   ⤷ SCENARIO Free subscribers see only the free articles
-      | GIVEN ↘ Free Frieda has a free subscription
-      |  WHEN ↘ Free Frieda logs in with her valid credentials
-      |  THEN ↘ she sees a Free article
+  ⤷ SCENARIO Free subscribers see only the free articles
+    | GIVEN ↘ Free Frieda has a free subscription
+    |  WHEN ↘ Free Frieda logs in with her valid credentials
+    |  THEN ↘ she sees a Free article
 
 TEST RESULT: 🟢 SUCCESS
 ⤷ FEATURE Subscribers see different articles based on their subscription level
-   ⤷ SCENARIO Subscriber with a paid subscription can access both free and paid articles
-      | GIVEN ↘ Paid Patty has a basic-level paid subscription
-      |  WHEN ↘ Paid Patty logs in with her valid credentials
-      |  THEN ↘ she sees a Free article and a Paid article
+  ⤷ SCENARIO Subscriber with a paid subscription can access both free and paid articles
+    | GIVEN ↘ Paid Patty has a basic-level paid subscription
+    |  WHEN ↘ Paid Patty logs in with her valid credentials
+    |  THEN ↘ she sees a Free article and a Paid article
+```
+
+### ✏️ Customizando a Sintaxe Gherkin
+
+O **GherXunit** permite personalizar os elementos lexicais do Gherkin, como `Given`, `When`, `Then`, `And`, `Background`, `Scenario` e `Feature`.
+Você pode definir seus emojis ou símbolos personalizados para representar esses elementos. O trecho de código a seguir mostra um exemplo de um lexer personalizado para emojis:
+
+```csharp
+// Custom lexer for emojis
+public record EmojiGherXunitLexer : IGherXunitLexer
+{
+    public (string Key, string Value)[] Given => [("Given", "\ud83d\ude10")];
+    public (string Key, string Value)[] When => [("When", "\ud83c\udfac")];
+    public (string Key, string Value)[] Then => [("Then", "\ud83d\ude4f")];
+    public (string Key, string Value)[] And => [("And", "\ud83d\ude02")];
+    public string Background => "\ud83d\udca4";
+    public string Scenario => "\ud83e\udd52\ud83d\udcd5";
+    public string Feature => "\ud83d\udcda";
+}
+```
+O **GherXunit** fornece dois lexers embutidos: `Lexers.PtBr` para Português (🇵🇹🇧🇷) e `Lexers.EnUs` para Inglês (🇺🇸).
+Você também pode criar seu lexer personalizado implementando a interface `IGherXunitLexer`. Para usar o lexer personalizado,
+você precisa passá-lo como parâmetro ao definir o cenário de teste.
+
+```csharp
+[Feature("Subscribers see different articles based on their subscription level")]
+public partial class LocalizationTest
+{
+    // Using Portuguese (🇵🇹🇧🇷) lexer
+    [Scenario("Inscrever-se para ver artigos gratuitos")]
+    async Task WhenFriedaLogs() => await this.ExecuteAscync(
+        refer: WhenFriedaLogsSteps,
+        lexer: Lexers.PtBr,
+        steps: """
+               Dado Free Frieda possui uma assinatura gratuita
+               Quando Free Frieda faz login com suas credenciais válidas
+               Então ela vê um artigo gratuito
+               """);
+
+    // Using custom emoji lexer
+    [Scenario("Subscriber with a paid subscription can access both free and paid articles")]
+    void WhenPattyLogs() => this.Execute(
+        refer: WhenPattyLogsSteps,
+        lexer: new EmojiGherXunitLexer(),
+        steps: """
+               Given Paid Patty has a basic-level paid subscription
+               When Paid Patty logs in with her valid credentials
+               Then she sees a Free article and a Paid article
+               """);
+}
+```
+
+O resultado da execução dos cenários de teste definidos na classe `LocalizationTest` usando o lexer personalizado seria semelhante à saída a seguir:
+```gherkindotnet
+TEST RESULT: 🟢 SUCCESS
+⤷ FUNCIONALIDADE Subscribers see different articles based on their subscription level
+  ⤷ CENARIO Inscrever-se para ver artigos gratuitos
+    |   DADO ↘ Free Frieda possui uma assinatura gratuita
+    | QUANDO ↘ Free Frieda faz login com suas credenciais válidas
+    |  ENTÃO ↘ ela vê um artigo gratuito
+    
+TEST RESULT: 🟢 SUCCESS
+⤷ 📚 Subscribers see different articles based on their subscription level
+  ⤷ 🥒📕 Subscriber with a paid subscription can access both free and paid articles
+    | 😐 ↘ Paid Patty has a basic-level paid subscription
+    | 🎬 ↘ Paid Patty logs in with her valid credentials
+    | 🙏 ↘ she sees a Free article and a Paid article    
 ```
 
 ### 🔎 O GherXunit é para você?
