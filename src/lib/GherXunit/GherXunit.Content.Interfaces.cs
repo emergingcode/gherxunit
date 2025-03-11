@@ -28,5 +28,17 @@ public struct GherXunitInterfaces
         {
             public ITestOutputHelper Output { get; }
         }
+        
+        //Lexer
+        public interface IGherXunitLexer
+        {
+            public (string Key, string Value)[] Given { get; }
+            public (string Key, string Value)[] When { get; }
+            public (string Key, string Value)[] Then { get; }
+            public (string Key, string Value)[] And { get; }
+            public string Background { get; }
+            public string Scenario { get; }
+            public string Feature { get; }
+        }
         """;
 }

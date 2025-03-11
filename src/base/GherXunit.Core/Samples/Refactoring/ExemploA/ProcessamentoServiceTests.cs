@@ -28,13 +28,13 @@ public partial class DataProcessingServiceTests : IAsyncLifetime
 
 public partial class DataProcessingServiceTests(ITestOutputHelper output) : IGherXunit
 {
-    private Mock<IApiClient> _apiClientMock;
-    private Mock<IRepository> _repositoryMock;
-    private Mock<IQueueService> _queueServiceMock;
-    private Mock<ILogger<DataProcessingService>> _loggerMock;
-    private DataProcessingService _dataProcessingService;
+    private Mock<IApiClient>? _apiClientMock;
+    private Mock<IRepository>? _repositoryMock;
+    private Mock<IQueueService>? _queueServiceMock;
+    private Mock<ILogger<DataProcessingService>>? _loggerMock;
+    private DataProcessingService? _dataProcessingService;
 
-    public ITestOutputHelper? Output { get; } = output;
+    public ITestOutputHelper Output { get; } = output;
 
     private Task Setup()
     {
@@ -57,30 +57,30 @@ public partial class DataProcessingServiceTests(ITestOutputHelper output) : IGhe
         // Arrange
         var data = new Data { Value = "Test" };
 
-        _apiClientMock.Setup(api => api.FetchDataAsync())
+        _apiClientMock?.Setup(api => api.FetchDataAsync())
             .ReturnsAsync(data);
 
-        _repositoryMock.Setup(repo => repo.SaveDataAsync(data))
+        _repositoryMock?.Setup(repo => repo.SaveDataAsync(data))
             .Returns(Task.CompletedTask);
 
-        _queueServiceMock.Setup(queue => queue.PublishMessage(data.Value))
+        _queueServiceMock?.Setup(queue => queue.PublishMessage(data.Value))
             .Returns(Task.CompletedTask);
 
         // Act
-        await _dataProcessingService.ProcessData();
+        await _dataProcessingService?.ProcessData()!;
 
         // Assert
-        _apiClientMock.Verify(api => api.FetchDataAsync(), Times.Once);
-        _repositoryMock.Verify(repo => repo.SaveDataAsync(data), Times.Once);
-        _queueServiceMock.Verify(queue => queue.PublishMessage(data.Value), Times.Once);
+        _apiClientMock?.Verify(api => api.FetchDataAsync(), Times.Once);
+        _repositoryMock?.Verify(repo => repo.SaveDataAsync(data), Times.Once);
+        _queueServiceMock?.Verify(queue => queue.PublishMessage(data.Value), Times.Once);
 
-        _loggerMock.Verify(
+        _loggerMock?.Verify(
             log => log.Log(
                 LogLevel.Information,
                 It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("Processing completed")),
+                It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains("Processing completed")),
                 null,
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                It.IsAny<Func<It.IsAnyType, Exception, string>>()!
             ), Times.Once);
     }
 
@@ -88,22 +88,22 @@ public partial class DataProcessingServiceTests(ITestOutputHelper output) : IGhe
     public async Task ProcessData_ShouldThrowExceptionWhenApiFails()
     {
         // Arrange
-        _apiClientMock.Setup(api => api.FetchDataAsync())
+        _apiClientMock?.Setup(api => api.FetchDataAsync())
             .ThrowsAsync(new HttpRequestException("API failure"));
 
         // Act & Assert
-        await Assert.ThrowsAsync<HttpRequestException>(() => _dataProcessingService.ProcessData());
+        await Assert.ThrowsAsync<HttpRequestException>(() => _dataProcessingService!.ProcessData());
 
-        _repositoryMock.Verify(repo => repo.SaveDataAsync(It.IsAny<Data>()), Times.Never);
-        _queueServiceMock.Verify(queue => queue.PublishMessage(It.IsAny<string>()), Times.Never);
+        _repositoryMock?.Verify(repo => repo.SaveDataAsync(It.IsAny<Data>()), Times.Never);
+        _queueServiceMock?.Verify(queue => queue.PublishMessage(It.IsAny<string>()), Times.Never);
 
-        _loggerMock.Verify(
+        _loggerMock?.Verify(
             log => log.Log(
                 LogLevel.Error,
                 It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("Error fetching data from API")),
+                It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains("Error fetching data from API")),
                 It.IsAny<HttpRequestException>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                It.IsAny<Func<It.IsAnyType, Exception, string>>()!
             ), Times.Once);
     }
 
@@ -113,24 +113,24 @@ public partial class DataProcessingServiceTests(ITestOutputHelper output) : IGhe
         // Arrange
         var data = new Data { Value = "Test" };
 
-        _apiClientMock.Setup(api => api.FetchDataAsync())
+        _apiClientMock?.Setup(api => api.FetchDataAsync())
             .ReturnsAsync(data);
 
-        _repositoryMock.Setup(repo => repo.SaveDataAsync(data))
+        _repositoryMock?.Setup(repo => repo.SaveDataAsync(data))
             .ThrowsAsync(new Exception("Database failure"));
 
         // Act & Assert
-        await Assert.ThrowsAsync<Exception>(() => _dataProcessingService.ProcessData());
+        await Assert.ThrowsAsync<Exception>(() => _dataProcessingService!.ProcessData());
 
-        _queueServiceMock.Verify(queue => queue.PublishMessage(It.IsAny<string>()), Times.Never);
+        _queueServiceMock?.Verify(queue => queue.PublishMessage(It.IsAny<string>()), Times.Never);
 
-        _loggerMock.Verify(
+        _loggerMock?.Verify(
             log => log.Log(
                 LogLevel.Error,
                 It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("Error saving data to the database")),
+                It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains("Error saving data to the database")),
                 It.IsAny<Exception>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                It.IsAny<Func<It.IsAnyType, Exception, string>>()!
             ), Times.Once);
     }
 
@@ -140,25 +140,25 @@ public partial class DataProcessingServiceTests(ITestOutputHelper output) : IGhe
         // Arrange
         var data = new Data { Value = "Test" };
 
-        _apiClientMock.Setup(api => api.FetchDataAsync())
+        _apiClientMock?.Setup(api => api.FetchDataAsync())
             .ReturnsAsync(data);
 
-        _repositoryMock.Setup(repo => repo.SaveDataAsync(data))
+        _repositoryMock?.Setup(repo => repo.SaveDataAsync(data))
             .Returns(Task.CompletedTask);
 
-        _queueServiceMock.Setup(queue => queue.PublishMessage(data.Value))
+        _queueServiceMock?.Setup(queue => queue.PublishMessage(data.Value))
             .ThrowsAsync(new Exception("Queue failure"));
 
         // Act & Assert
-        await Assert.ThrowsAsync<Exception>(() => _dataProcessingService.ProcessData());
+        await Assert.ThrowsAsync<Exception>(() => _dataProcessingService!.ProcessData());
 
-        _loggerMock.Verify(
+        _loggerMock?.Verify(
             log => log.Log(
                 LogLevel.Error,
                 It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((v, t) => v.ToString().Contains("Error publishing message to the queue")),
+                It.Is<It.IsAnyType>((v, t) => v.ToString()!.Contains("Error publishing message to the queue")),
                 It.IsAny<Exception>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()
+                It.IsAny<Func<It.IsAnyType, Exception, string>>()!
             ), Times.Once);
     }
     
