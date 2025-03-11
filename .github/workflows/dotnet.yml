@@ -7,18 +7,15 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     strategy:
       matrix:
-        #configuration: [Debug, Release]
         configuration: [Release]
 
     runs-on: ubuntu-latest
 
     env:
-      Version: 1.2.${{ github.run_number }}
+      Version: 1.3.${{ github.run_number }}
       Solution_Path: ./src/GherXunit.sln  
       Project_Path: ./src/lib/GherXunit/GherXunit.csproj
       Package_Path: ./src/lib/GherXunit/**/*.
@@ -49,4 +46,3 @@ jobs:
       run: |
         dotnet pack ${{env.Project_Path}} --no-restore --configuration ${{ matrix.configuration }} -p:PackageVersion=${{ env.Version }}
         dotnet nuget push ${{env.Package_Path}}${{ env.Version }}.nupkg --api-key ${{ secrets.NUGET_KEY }} --source ${{ env.NUGET_INDEX }}
-      
