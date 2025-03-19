@@ -1,14 +1,14 @@
 #nullable enable
 global using Examples = Xunit.InlineDataAttribute;
-using System.ComponentModel;
+using GherXunitComponentModel = System.ComponentModel;
 using Xunit;
 
 namespace GherXunit.Annotations;
 
 // Description attributes
-public sealed class FeatureAttribute(string description) : DescriptionAttribute(description);
-public sealed class RuleAttribute(string description) : DescriptionAttribute(description);
-public sealed class BackgroundAttribute() : DescriptionAttribute("Background");
+public sealed class FeatureAttribute(string description) : GherXunitComponentModel.DescriptionAttribute(description);
+public sealed class RuleAttribute(string description) : GherXunitComponentModel.DescriptionAttribute(description);
+public sealed class BackgroundAttribute() : GherXunitComponentModel.DescriptionAttribute("Background");
 
 // Xunit attributes
 public sealed class ScenarioAttribute(string displayName) : GherXunitFactAttribute(displayName);
