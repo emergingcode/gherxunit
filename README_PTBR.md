@@ -170,8 +170,7 @@ TEST RESULT: 🟢 SUCCESS
 
 Se a sua equipe já usa xUnit e deseja experimentar uma abordagem mais próxima do BDD, sem mudar drasticamente seu fluxo de trabalho, o GherXunit pode ser uma opção a considerar. Ele não elimina todos os desafios do BDD, mas busca facilitar sua adoção em ambientes onde o xUnit já é amplamente utilizado.
 Veja mais exemplos de uso e detalhes de implementação de `Background`, `Rule`, `Features` e outros elementos
-no [código exemplo](/src/sample/BddSample/Samples) disponível no repositório do GherXUnit.
-
+no [código exemplo](/src/base/GherXunit.Core/Samples) disponível no repositório do GherXUnit.
 
 ## 📚 Referências
 
