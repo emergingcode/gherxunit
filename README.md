@@ -97,71 +97,6 @@ TEST RESULT: 🟢 SUCCESS
     |  THEN ↘ she sees a Free article and a Paid article
 ```
 
-### ✏️ Customizing the lexical elements of Gherkin
-
-The **GherXunit** allows you to customize the lexical elements of Gherkin, such as `Given`, `When`, `Then`, `And`, `Background`, `Scenario`, and `Feature`. 
-You can define your custom emojis or symbols to represent these elements. The following code snippet shows an example of a custom lexer for emojis:
-```csharp
-// Custom lexer for emojis
-public record EmojiGherXunitLexer : IGherXunitLexer
-{
-    public (string Key, string Value)[] Given => [("Given", "\ud83d\ude10")];
-    public (string Key, string Value)[] When => [("When", "\ud83c\udfac")];
-    public (string Key, string Value)[] Then => [("Then", "\ud83d\ude4f")];
-    public (string Key, string Value)[] And => [("And", "\ud83d\ude02")];
-    public string Background => "\ud83d\udca4";
-    public string Scenario => "\ud83e\udd52\ud83d\udcd5";
-    public string Feature => "\ud83d\udcda";
-}
-```
-The Gherkin provides two built-in lexers: `Lexers.PtBr` for Portuguese (🇵🇹🇧🇷) and `Lexers.EnUs` for English (🇺🇸). 
-You can also create your custom lexer by implementing the `IGherXunitLexer` interface. To use the custom lexer, 
-you need to pass it as a parameter when defining the test scenario.
-
-```csharp
-[Feature("Subscribers see different articles based on their subscription level")]
-public partial class LocalizationTest
-{
-    // Using Portuguese (🇵🇹🇧🇷) lexer
-    [Scenario("Inscrever-se para ver artigos gratuitos")]
-    async Task WhenFriedaLogs() => await this.ExecuteAscync(
-        refer: WhenFriedaLogsSteps,
-        lexer: Lexers.PtBr,
-        steps: """
-               Dado Free Frieda possui uma assinatura gratuita
-               Quando Free Frieda faz login com suas credenciais válidas
-               Então ela vê um artigo gratuito
-               """);
-
-    // Using custom emoji lexer
-    [Scenario("Subscriber with a paid subscription can access both free and paid articles")]
-    void WhenPattyLogs() => this.Execute(
-        refer: WhenPattyLogsSteps,
-        lexer: new EmojiGherXunitLexer(),
-        steps: """
-               Given Paid Patty has a basic-level paid subscription
-               When Paid Patty logs in with her valid credentials
-               Then she sees a Free article and a Paid article
-               """);
-}
-```
-The result of running the test scenarios defined in the `LocalizationTest` class using the custom lexer would be similar to the following output:
-```gherkindotnet
-TEST RESULT: 🟢 SUCCESS
-⤷ FUNCIONALIDADE Subscribers see different articles based on their subscription level
-  ⤷ CENARIO Inscrever-se para ver artigos gratuitos
-    |   DADO ↘ Free Frieda possui uma assinatura gratuita
-    | QUANDO ↘ Free Frieda faz login com suas credenciais válidas
-    |  ENTÃO ↘ ela vê um artigo gratuito
-    
-TEST RESULT: 🟢 SUCCESS
-⤷ 📚 Subscribers see different articles based on their subscription level
-  ⤷ 🥒📕 Subscriber with a paid subscription can access both free and paid articles
-    | 😐 ↘ Paid Patty has a basic-level paid subscription
-    | 🎬 ↘ Paid Patty logs in with her valid credentials
-    | 🙏 ↘ she sees a Free article and a Paid article    
-```
-
 ### 🔎 Is GherXunit for You?
 If your team already uses xUnit and wants to experiment with a BDD approach without drastically changing its workflow, **GherXunit** may be an option to consider. It does not eliminate all BDD challenges but seeks to facilitate its adoption in environments where xUnit is already widely used.
 See more usage examples and implementation details for `Background`, `Rule`, `Features`, and other elements in the [sample code](/src/base/GherXunit.Core/Samples) available in the **GherXunit** repository.
@@ -173,3 +108,39 @@ See more usage examples and implementation details for `Background`, `Rule`, `Fe
 - 📖 **North, D. (2006)**. *Introducing BDD. DanNorth.net.* Available at: [https://dannorth.net/introducing-bdd/](https://dannorth.net/introducing-bdd/).
 - 📖 **xUnit. (2023)**. *xUnit.net.* Available at: [https://xunit.net/](https://xunit.net/).
 - 📖 **Gherkin. (2023)**. *Gherkin.* Available at: [https://cucumber.io/docs/gherkin/](https://cucumber.io/docs/gherkin/).
+
+### 📌 Definindo o Lexer globalmente
+
+A partir da versão 1.3.0, você pode definir o Lexer padrão para todos os testes do projeto (ou de uma classe) usando `GherXunitConfig.DefaultLexer`:
+
+```csharp
+public partial class LocalizationTest
+{
+    static LocalizationTest()
+    {
+        GherXunitConfig.DefaultLexer = Lexers.PtBr; // Define o padrão para todos os testes desta classe
+    }
+
+    [Scenario("Inscrever-se para ver artigos gratuitos")]
+    async Task WhenFriedaLogs() => await this.ExecuteAscync(
+        refer: WhenFriedaLogsSteps,
+        steps: """
+               Dado Free Frieda possui uma assinatura gratuita
+               Quando Free Frieda faz login com suas credenciais válidas
+               Então ela vê um artigo gratuito
+               """);
+
+    // Para cenários que precisam de um lexer diferente, basta passar o parâmetro normalmente:
+    [Scenario("Custom emoji lexer")]
+    void WhenPattyLogs() => this.Execute(
+        refer: WhenPattyLogsSteps,
+        lexer: new EmojiGherXunitLexer(),
+        steps: """
+               Given Paid Patty has a basic-level paid subscription
+               When Paid Patty logs in with her valid credentials
+               Then she sees a Free article and a Paid article
+               """);
+}
+```
+
+> **Dica:** O parâmetro `lexer` só precisa ser informado no teste se você quiser sobrescrever o padrão global.

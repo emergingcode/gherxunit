@@ -63,3 +63,8 @@ public record PtBrGherXunitLexer : IGherXunitLexer
     public string Scenario => "CENARIO";
     public string Feature => "FUNCIONALIDADE";
 }
+
+public static class GherXunitConfig
+{
+    public static IGherXunitLexer? DefaultLexer { get; set; }
+}

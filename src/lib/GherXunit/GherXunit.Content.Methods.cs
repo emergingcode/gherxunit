@@ -74,7 +74,7 @@ public struct GherXunitMethods
                     ? $"{(isBackground ? "Background" : "Scenario")} {methodName}\r\n"
                     : $"{(isBackground ? "Background" : "Scenario")} {iTest.DisplayName}\r\n";
                 
-                var stepString = new StringHandler(lexer ?? Lexers.Default);
+                var stepString = new StringHandler(lexer ?? GherXunitConfig.DefaultLexer ?? Lexers.Default);
                 stepString.AppendLiteral($"{statusResult}{featuresText}{scenarioText}{steps}");
         
                 output?.WriteLine(".");
