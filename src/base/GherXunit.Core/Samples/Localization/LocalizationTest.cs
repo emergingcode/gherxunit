@@ -5,10 +5,14 @@ namespace BddTests.Samples.Localization;
 [Feature("Subscribers see different articles based on their subscription level")]
 public partial class LocalizationTest
 {
+    static LocalizationTest()
+    {
+        GherXunitConfig.DefaultLexer = Lexers.PtBr;
+    }
+
     [Scenario("Inscrever-se para ver artigos gratuitos")]
     async Task WhenFriedaLogs() => await this.ExecuteAscync(
         refer: WhenFriedaLogsSteps,
-        lexer: Lexers.PtBr,
         steps: """
                Dado Free Frieda possui uma assinatura gratuita
                Quando Free Frieda faz login com suas credenciais válidas
