@@ -1,46 +1,31 @@
 # 🚀 GherXUnit: An Alternative for BDD with xUnit
-[🇧🇷 Versão em Português](README_PTBR.md) | [🇬🇧 English Version](README.md)  
+
 [![NuGet](https://img.shields.io/nuget/v/GherXunit.svg)](https://www.nuget.org/packages/GherXunit)
 
-The adoption of Behavior-Driven Development (BDD) has become increasingly common in software development, promoting better communication between technical and non-technical teams. However, its integration with traditional testing frameworks is not always straightforward.
+## Introduction
 
-> [!IMPORTANT]  
-> According to the study *Behavior Driven Development: A Systematic Literature Review* (Farooq et al., 2023, IEEE Access), some recurring difficulties in using BDD include:
-> - **Complex automation**: Integration with external tools can increase configuration and test execution complexity.
-> - **Difficult maintenance**: As the test base grows, Gherkin scenarios can become hard to manage.
-> - **Learning curve**: The need to master new tools can hinder BDD adoption, especially in teams already familiar with traditional frameworks.
+GherXunit is a BDD extension for xUnit, allowing you to write Gherkin scenarios directly in your xUnit tests, without the need for external tools like Cucumber or SpecFlow.
 
-**GherXunit** emerges as a viable alternative for teams looking to explore the benefits of BDD within the xUnit framework, without requiring external tools such as Cucumber or SpecFlow. It acts as a superset of xUnit, allowing tests to be written in Gherkin.
+## Why GherXunit?
 
-### ✅ Where Can GherXunit Help?
+- **Gherkin syntax directly in xUnit**: No extra dependencies.
+- **Modular and organized code**: Use partial classes to separate scenarios and steps.
+- **Smooth integration**: Easily mix BDD and traditional unit tests.
 
-**GherXunit** aims to offer an alternative for teams already using xUnit and looking to incorporate the BDD structure without completely changing their tools. Among its benefits are:
+## Getting Started
 
-- ✔ **Using Gherkin syntax directly in xUnit**, reducing external dependencies.
-- ✔ **More modular and organized code**, using partial classes to separate scenarios and steps.
-- ✔ **Better integration with unit tests**, allowing a smoother transition between different levels of testing.
+Install via [NuGet](https://www.nuget.org/packages/GherXunit/):
 
-### 📦 Getting Started
+```sh
+dotnet add package GherXunit
+```
 
-This package is available through [Nuget Packages](https://www.nuget.org/packages/GherXunit/).
+## Usage
 
-| Version                                                                                        | Downloads | Status |  
-|------------------------------------------------------------------------------------------------| ----- |----- |
-| [![NuGet](https://img.shields.io/nuget/v/GherXunit.svg)](https://www.nuget.org/packages/GherXunit) | [![Nuget](https://img.shields.io/nuget/dt/GherXunit.svg)](https://www.nuget.org/packages/GherXunit) | [![.NET](https://github.com/emergingcode/gherxunit/actions/workflows/dotnet.yml/badge.svg)](https://github.com/emergingcode/gherxunit/actions/workflows/dotnet.yml) |
-
-
-### 💡 How Does It Work?
-
-The core idea of **GherXunit** is to allow test scenarios to be written in a structure familiar to those already using xUnit.
-For that, it provides a set of attributes and methods that allow the definition of test scenarios using Gherkin syntax.
-The following sections provide examples of how to define test scenarios and implement step methods using **GherXunit**.
-
-#### 📌 Example of Scenario Definition:
-The following code snippet shows a test scenario defined using Gherkin syntax in a class named `SubscriptionTest`:
+### Scenario Definition
 
 ```csharp
 using GherXunit.Annotations;
-...
 
 [Feature("Subscribers see different articles based on their subscription level")]
 public partial class SubscriptionTest
@@ -53,20 +38,11 @@ public partial class SubscriptionTest
                When Free Frieda logs in with her valid credentials
                Then she sees a Free article
                """);
-
-    [Scenario("Subscriber with a paid subscription can access both free and paid articles")]
-    void WhenPattyLogs() => this.Execute(
-        refer: WhenPattyLogsSteps,
-        steps: """
-               Given Paid Patty has a basic-level paid subscription
-               When Paid Patty logs in with her valid credentials
-               Then she sees a Free article and a Paid article
-               """);
 }
 ```
 
-#### 📌 Example of Step Implementation:
-The following code snippet shows the implementation of the step methods for the test scenario defined in the `SubscriptionTest` class:
+### Step Implementation
+
 ```csharp
 public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
 {
@@ -76,11 +52,8 @@ public partial class SubscriptionTest(ITestOutputHelper output): IGherXunit
 }
 ```
 
-> [!TIP]  
-> In this example, the `SubscriptionTest` class is split into two files. The first file defines the test scenarios, while the second file defines the step methods. Using `partial` allows both files to contribute to the definition of the same `SubscriptionTest` class.
+### Output Example
 
-#### 📌 Example of output highlighting the test results:
-The result of running the test scenarios defined in the `SubscriptionTest` class would be similar to the following output:
 ```gherkindotnet
 TEST RESULT: 🟢 SUCCESS
 ⤷ FEATURE Subscribers see different articles based on their subscription level
@@ -88,40 +61,40 @@ TEST RESULT: 🟢 SUCCESS
     | GIVEN ↘ Free Frieda has a free subscription
     |  WHEN ↘ Free Frieda logs in with her valid credentials
     |  THEN ↘ she sees a Free article
-
-TEST RESULT: 🟢 SUCCESS
-⤷ FEATURE Subscribers see different articles based on their subscription level
-  ⤷ SCENARIO Subscriber with a paid subscription can access both free and paid articles
-    | GIVEN ↘ Paid Patty has a basic-level paid subscription
-    |  WHEN ↘ Paid Patty logs in with her valid credentials
-    |  THEN ↘ she sees a Free article and a Paid article
 ```
 
-### 🔎 Is GherXunit for You?
-If your team already uses xUnit and wants to experiment with a BDD approach without drastically changing its workflow, **GherXunit** may be an option to consider. It does not eliminate all BDD challenges but seeks to facilitate its adoption in environments where xUnit is already widely used.
-See more usage examples and implementation details for `Background`, `Rule`, `Features`, and other elements in the [sample code](/src/base/GherXunit.Core/Samples) available in the **GherXunit** repository.
+## Customizing the Lexer
 
+You can customize the Gherkin keywords (Given, When, Then, etc.) by implementing `IGherXunitLexer`. Built-in lexers include `Lexers.PtBr` (Portuguese) and `Lexers.EnUs` (English).
 
-## 📚 References
+#### Example: Custom Emoji Lexer
 
-- 📖 **Farooq, M. S., et al. (2023). Behavior Driven Development**: *A Systematic Literature Review. IEEE* Access. DOI: [10.1109/ACCESS.2023.3302356](https://doi.org/10.1109/ACCESS.2023.3302356).
-- 📖 **North, D. (2006)**. *Introducing BDD. DanNorth.net.* Available at: [https://dannorth.net/introducing-bdd/](https://dannorth.net/introducing-bdd/).
-- 📖 **xUnit. (2023)**. *xUnit.net.* Available at: [https://xunit.net/](https://xunit.net/).
-- 📖 **Gherkin. (2023)**. *Gherkin.* Available at: [https://cucumber.io/docs/gherkin/](https://cucumber.io/docs/gherkin/).
+```csharp
+public record EmojiGherXunitLexer : IGherXunitLexer
+{
+    public (string Key, string Value)[] Given => [("Given", "😐")];
+    public (string Key, string Value)[] When => [("When", "🎬")];
+    public (string Key, string Value)[] Then => [("Then", "🙏")];
+    public (string Key, string Value)[] And => [("And", "😂")];
+    public string Background => "💤";
+    public string Scenario => "🥒📕";
+    public string Feature => "📚";
+}
+```
 
-### 📌 Definindo o Lexer globalmente
+## Setting a Global Lexer
 
-A partir da versão 1.3.0, você pode definir o Lexer padrão para todos os testes do projeto (ou de uma classe) usando `GherXunitConfig.DefaultLexer`:
+From version 1.3.0, you can set a default lexer for all tests in your project or class using `GherXunitConfig.DefaultLexer`:
 
 ```csharp
 public partial class LocalizationTest
 {
     static LocalizationTest()
     {
-        GherXunitConfig.DefaultLexer = Lexers.PtBr; // Define o padrão para todos os testes desta classe
+        GherXunitConfig.DefaultLexer = Lexers.PtBr;
     }
 
-    [Scenario("Inscrever-se para ver artigos gratuitos")]
+    [Scenario("Free articles in Portuguese")]
     async Task WhenFriedaLogs() => await this.ExecuteAscync(
         refer: WhenFriedaLogsSteps,
         steps: """
@@ -130,7 +103,7 @@ public partial class LocalizationTest
                Então ela vê um artigo gratuito
                """);
 
-    // Para cenários que precisam de um lexer diferente, basta passar o parâmetro normalmente:
+    // To override the default lexer for a specific scenario:
     [Scenario("Custom emoji lexer")]
     void WhenPattyLogs() => this.Execute(
         refer: WhenPattyLogsSteps,
@@ -143,4 +116,15 @@ public partial class LocalizationTest
 }
 ```
 
-> **Dica:** O parâmetro `lexer` só precisa ser informado no teste se você quiser sobrescrever o padrão global.
+> **Tip:** Only specify the `lexer` parameter if you want to override the global default.
+
+## Is GherXunit for You?
+
+If your team already uses xUnit and wants to experiment with a BDD approach without drastically changing its workflow, **GherXunit** may be an option to consider. See more usage examples and implementation details for `Background`, `Rule`, `Features`, and other elements in the [sample code](/src/base/GherXunit.Core/Samples).
+
+## References
+
+- Farooq, M. S., et al. (2023). Behavior Driven Development: A Systematic Literature Review. IEEE Access. [DOI](https://doi.org/10.1109/ACCESS.2023.3302356)
+- North, D. (2006). Introducing BDD. [DanNorth.net](https://dannorth.net/introducing-bdd/)
+- xUnit. (2023). [xUnit.net](https://xunit.net/)
+- Gherkin. (2023). [Gherkin](https://cucumber.io/docs/gherkin/)
